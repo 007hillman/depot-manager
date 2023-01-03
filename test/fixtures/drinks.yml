@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  supplyer: MyString
+  size: MyString
+  packaging: MyString
+  alcoholic: false
+  retail_price: 9.99
+  wholesale_price: 9.99
+
+two:
+  name: MyString
+  supplyer: MyString
+  size: MyString
+  packaging: MyString
+  alcoholic: false
+  retail_price: 9.99
+  wholesale_price: 9.99

@@ -1,0 +1,42 @@
+<div id="<%= dom_id drink %>" class="grid md:grid-cols-8">
+  <p class="my-5">
+    <%= drink.name %>
+  </p>
+
+  <p class="my-5">
+    <%= drink.supplyer %>
+  </p>
+
+  <p class="my-5">
+    <%= drink.size %>
+  </p>
+
+  <p class="my-5">
+    <%= drink.packaging %>
+  </p>
+
+  <p class="my-5">
+    <%= drink.alcoholic %>
+  </p>
+
+  <p class="my-5">
+    <%= drink.retail_price %>
+  </p>
+
+  <p class="my-5">
+    <%= drink.wholesale_price %>
+  </p>
+
+  <% if action_name != "show" %>
+  <div>
+    <%= link_to  drink, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" do %>
+      <ion-icon name="eye-outline"></ion-icon> 
+    <% end %>
+    <%= link_to  edit_drink_path(drink), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" do %>
+      <ion-icon name="pencil-outline"></ion-icon>
+    <% end %>
+  </div>
+  
+  <% end %>
+</div>
+    <hr class="mt-6">

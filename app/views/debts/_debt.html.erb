@@ -1,0 +1,22 @@
+<div id="<%= dom_id debt %>" class="grid grid-cols-4 ">
+  <p class="my-5">
+    <%= link_to  debt do %>
+      <%= debt.client_name %>
+    <% end %>
+  </p>
+
+  <p class="my-5">
+    <%= debt.cash_in %>
+  </p>
+
+  <p class="my-5">
+    <%= debt.cash_out %>
+  </p>
+  <div class="flex items-center">
+    <% if action_name != "show" %>
+    <%= link_to "Show this debt", debt, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+  <% end %>
+  </div>
+  
+</div>
+    <hr class="mt-2">

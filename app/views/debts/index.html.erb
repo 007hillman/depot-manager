@@ -1,0 +1,38 @@
+<div class="w-full">
+  <% if notice.present? %>
+    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+  <% end %>
+  <div data-controller="debts">
+    <%= form_with url: debts_url, method: :get, data: {action: "submit->debts#submit"} do |form|%>
+    <div class="flex justify-center items-center ">
+      <%= form.text_field :query , class: "inline shadow rounded-md border border-gray-300 outline-none px-3 py-2 mt-2 mr-4 w-2/4 ", data: {debts_target: "query"}%>
+      <div class="inline ">
+        <%= form.submit "Search", class: "rounded-lg py-2 px-5 text-blue-600 text-white inline-block font-medium cursor-pointer border border-blue-400" %>
+      </div>
+    </div>
+    <% end %>
+  </div>
+  <div class="flex justify-between items-center">
+    <h1 class="font-bold text-4xl">Debts</h1>
+    <%= link_to 'New debt', new_debt_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+  </div>
+<div id="" class="grid grid-cols-4 mt-2">
+  <p class="my-2">
+    <strong class="block font-medium mb-1">Client name:</strong>
+  </p>
+
+  <p class="my-2">
+    <strong class="block font-medium mb-1">Total cash in:</strong>
+  </p>
+
+  <p class="my-2">
+    <strong class="block font-medium mb-1">Total cash out:</strong>
+  </p>
+  <div>
+    
+  </div>
+</div>
+  <div id="debts" class="min-w-full flex flex-col">
+    <%= render @debts %>
+  </div>
+</div>
