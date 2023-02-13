@@ -25,6 +25,8 @@ class DebtsController < ApplicationController
 
   # GET /debts/1/edit
   def edit
+    @clients = Client.all
+
   end
 
   # POST /debts or /debts.json
@@ -78,6 +80,6 @@ class DebtsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def debt_params
-      params.require(:debt).permit(:client_name, :cash_in, :cash_out)
+      params.require(:debt).permit(:client_name, :cash_in,:change, :cash_out)
     end
 end

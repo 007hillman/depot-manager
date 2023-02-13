@@ -12,38 +12,44 @@
   <% end %>
 
   <div class="my-5">
-    <%= form.label :name %>
-    <%= form.text_field :name, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    <%= form.label :name , class: "font-bold"%>
+    <%= form.text_field :name, class: "block shadow rounded-md border border-gray-300 outline-none px-3 py-2 mt-2 w-full", autofocus: true %>
   </div>
 
   <div class="my-5">
-    <%= form.label :supplyer %>
-    <%= form.text_field :supplyer, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    <%= form.label :supplyer , class: "font-bold" %>
+<%= form.select :supplyer, options_for_select([["Supermont","Supermont"],["Brasseries du Cameroun", "Brasseries du Cameroun"],["Guinness Cameroun SA","Guinness Cameroun SA"],["Foreign","Foreign"]]),{},{class: "block shadow rounded-md border border-gray-300 outline-none px-3 py-2 mt-2 w-full"} %>
   </div>
 
   <div class="my-5">
     <%= form.label :size , class: "font-bold" %> <span class="text-xs italic">per unit in litres</span>
-    <%= form.text_field :size, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full", placeholder:"in litres" %> 
+    <%= form.text_field :size, class: "block shadow rounded-md border border-gray-300 outline-none px-3 py-2 mt-2 w-full", placeholder:"in litres" %> 
   </div>
-
   <div class="my-5">
-    <%= form.label :packaging %>
-    <%= form.select :packaging, options_for_select([["single","single"],["palette", "palette"],["crate","crate"],["carton(box)","carton"]]),{},{class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full"} %>
+    <%= form.label :container_type , class: "font-bold"%>
+    <%= form.select :container_type, options_for_select([["plastic bottle","plastic bottle"],["glass bottle", "glass bottle"],["carton","carton"],["alluminium can","alluminium can"]]),{},{class: "block shadow rounded-md border border-gray-300 outline-none px-3 py-2 mt-2 w-full"} %>
   </div>
-
   <div class="my-5">
-    <%= form.label :alcoholic %>
+    <%= form.label :packaging , class: "font-bold"%>
+    <%= form.select :packaging, options_for_select([["single","single"],["palette", "palette"],["crate","crate"],["carton(box)","carton"]]),{},{class: "block shadow rounded-md border border-gray-300 outline-none px-3 py-2 mt-2 w-full"} %>
+  </div>
+  <div class="my-5">
+    <%= form.label :number_per_package , class: "font-bold" %> 
+    <%= form.select :packaging, options_for_select([["1",1],["6", 6],["12",12],["15",15],["24",24]]),{},{class: "block shadow rounded-md border border-gray-300 outline-none px-3 py-2 mt-2 w-full"} %> 
+  </div>
+  <div class="my-5">
+    <%= form.label "Is it alcoholic? : ", class: "font-bold" %>
     <%= form.check_box :alcoholic, class: "block mt-2 h-5 w-5" %>
   </div>
 
   <div class="my-5">
-    <%= form.label :retail_price %>
-    <%= form.text_field :retail_price, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    <%= form.label :retail_price , class: "font-bold"%>
+    <%= form.text_field :retail_price, class: "block shadow rounded-md border border-gray-300 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
   <div class="my-5">
-    <%= form.label :wholesale_price %>
-    <%= form.text_field :wholesale_price, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    <%= form.label :wholesale_price , class: "font-bold"%>
+    <%= form.text_field :wholesale_price, class: "block shadow rounded-md border border-gray-300 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
   <div class="inline">

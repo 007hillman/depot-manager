@@ -1,0 +1,6 @@
+Cash Received : <%= @cash_in%> <br>
+Goods sold : <%= @cash_out%> <br>
+Money out : <%= @change%><br>
+Money in hand at the start of the day : 36000
+<br>
+Money which is supposed to be in hand at the end of the day : <%= @cash_in +36000 - @change %>

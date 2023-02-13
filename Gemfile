@@ -25,6 +25,12 @@ gem "turbo-rails"
 gem "stimulus-rails"
 gem 'pg_search'
 
+# use the receipt gem in app
+gem 'receipts'
+#use simple form in our app
+gem 'simple_form'
+#using cocoon in our app
+gem "cocoon"
 # Use Tailwind CSS [https://github.com/rails/tailwindcss-rails]
 gem "tailwindcss-rails"
 

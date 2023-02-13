@@ -13,10 +13,11 @@
     <% end %>
   </div>
   <div class="flex justify-between items-center">
-    <h1 class="font-bold text-4xl">Debts</h1>
-    <%= link_to 'New debt', new_debt_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+    <h1 class="font-bold text-4xl">Transactions</h1>
+    <%= link_to "Summary", static_transaction_summary_path, class: "bg-gray-900 text-yellow-500"%>
+    <%= link_to 'New transaction', new_debt_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
   </div>
-<div id="" class="grid grid-cols-4 mt-2">
+<div id="" class="grid grid-cols-5 mt-2">
   <p class="my-2">
     <strong class="block font-medium mb-1">Client name:</strong>
   </p>
@@ -27,6 +28,9 @@
 
   <p class="my-2">
     <strong class="block font-medium mb-1">Total cash out:</strong>
+  </p>
+    <p class="my-2">
+    <strong class="block font-medium mb-1">Change to client:</strong>
   </p>
   <div>
     

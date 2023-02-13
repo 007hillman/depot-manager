@@ -9,14 +9,14 @@
   </div>
   <%= form_with(url: drinks_path, method: :get, data: {turbo_frame: "drinks",turbo_action: "advance"}) do |form| %>
 
-    <%= form.label :query, "Search by drink name:", class: "block mb-2" %>
-    <div class="flex space-x-3">
-      <%= form.text_field :query, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full ring-0 focus:ring-4 focus:ring-orange-100 focus:shadow-none focus:border-orange-500 focus:outline-none",  data: {action: "input->drinks#search"} %>
+    <div class="flex space-x-3 mb-10 mt-5">
+      <%= form.text_field :query, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full ring-0 focus:ring-4 focus:ring-orange-100 focus:shadow-none focus:border-orange-500 focus:outline-none", placeholder: "search drink by name",  data: {action: "input->drinks#search"} %>
 
       <%= form.submit 'Search', class: "px-4  font-medium
     bg-orange-300 text-neutal-900 rounded flex items-center cursor-pointer hover:bg-orange-400 text-white focus:ring-4 ring-0 focus:ring-orange-100" %>
     </div>
 <% end %>
+<hr>
   <div class="grid md:grid-cols-8">
     <p class="my-5">
       <strong class="block font-medium mb-1">Name:</strong>

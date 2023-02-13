@@ -81,6 +81,7 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
+    cocoon (1.2.15)
     concurrent-ruby (1.1.10)
     crass (1.0.6)
     date (3.3.3)
@@ -132,10 +133,16 @@ GEM
     nio4r (2.5.8)
     nokogiri (1.13.10-x86_64-linux)
       racc (~> 1.4)
+    pdf-core (0.9.0)
     pg (1.4.5)
     pg_search (2.3.6)
       activerecord (>= 5.2)
       activesupport (>= 5.2)
+    prawn (2.4.0)
+      pdf-core (~> 0.9.0)
+      ttfunk (~> 1.7)
+    prawn-table (0.2.2)
+      prawn (>= 1.3.0, < 3.0.0)
     public_suffix (5.0.1)
     puma (5.6.5)
       nio4r (~> 2.0)
@@ -170,6 +177,9 @@ GEM
       thor (~> 1.0)
       zeitwerk (~> 2.5)
     rake (13.0.6)
+    receipts (2.2.0)
+      prawn (>= 1.3.0, < 3.0.0)
+      prawn-table (~> 0.2.1)
     redis (4.8.0)
     regexp_parser (2.6.1)
     reline (0.3.2)
@@ -182,6 +192,9 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
+    simple_form (5.2.0)
+      actionpack (>= 5.2)
+      activemodel (>= 5.2)
     sprockets (4.2.0)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -195,6 +208,7 @@ GEM
       railties (>= 6.0.0)
     thor (1.2.1)
     timeout (0.3.1)
+    ttfunk (1.7.0)
     turbo-rails (1.3.2)
       actionpack (>= 6.0.0)
       activejob (>= 6.0.0)
@@ -224,6 +238,7 @@ PLATFORMS
 DEPENDENCIES
   bootsnap
   capybara
+  cocoon
   debug
   image_processing (~> 1.2)
   importmap-rails
@@ -232,8 +247,10 @@ DEPENDENCIES
   pg_search
   puma (~> 5.0)
   rails (~> 7.0.4)
+  receipts
   redis (~> 4.0)
   selenium-webdriver
+  simple_form
   sprockets-rails
   stimulus-rails
   tailwindcss-rails

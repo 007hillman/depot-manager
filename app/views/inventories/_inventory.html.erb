@@ -1,0 +1,22 @@
+<div id="<%= dom_id inventory %>">
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Drink:</strong>
+    <%= inventory.drink_id %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Quantity:</strong>
+    <%= inventory.quantity %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Action:</strong>
+    <%= inventory.action %>
+  </p>
+
+  <% if action_name != "show" %>
+    <%= link_to "Show this inventory", inventory, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= link_to 'Edit this inventory', edit_inventory_path(inventory), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+    <hr class="mt-6">
+  <% end %>
+</div>

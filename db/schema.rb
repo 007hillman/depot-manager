@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_02_220504) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_09_221638) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -59,12 +59,21 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_02_220504) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "commands", force: :cascade do |t|
+    t.string "client_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.decimal "amount_paid"
+    t.string "payment_method"
+  end
+
   create_table "debts", force: :cascade do |t|
     t.string "client_name"
     t.decimal "cash_in", precision: 30, scale: 10
     t.decimal "cash_out", precision: 30, scale: 10
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "change"
   end
 
   create_table "drinks", force: :cascade do |t|
@@ -77,6 +86,27 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_02_220504) do
     t.decimal "wholesale_price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "number_per_package"
+    t.string "container_type"
+  end
+
+  create_table "inventories", force: :cascade do |t|
+    t.bigint "drink_id", null: false
+    t.decimal "quantity"
+    t.string "action"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["drink_id"], name: "index_inventories_on_drink_id"
+  end
+
+  create_table "items", force: :cascade do |t|
+    t.bigint "drink_id", null: false
+    t.bigint "command_id", null: false
+    t.decimal "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["command_id"], name: "index_items_on_command_id"
+    t.index ["drink_id"], name: "index_items_on_drink_id"
   end
 
   create_table "reminders", force: :cascade do |t|
@@ -84,6 +114,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_02_220504) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "suppliers", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "inventories", "drinks"
+  add_foreign_key "items", "commands"
+  add_foreign_key "items", "drinks"
 end

@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  drink: one
+  command: one
+  quantity: 9.99
+
+two:
+  drink: two
+  command: two
+  quantity: 9.99

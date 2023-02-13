@@ -1,0 +1,24 @@
+<div id="<%= dom_id command %>">
+  <p class="my-5">
+    <strong class=" font-bold mb-1">Client name:</strong>
+    <%= command.client_name %>
+  </p>
+  <div class="grid grid-cols-4">
+    <div> Item</div> <div> Quantity</div> <div>Unit price</div> <div> Total price</div>
+  </div>
+  <div class="grid grid-cols-4 gap-10">
+    <% command.items.each do |item|%>
+      <div> <%= item.drink.name %> </div>
+      <div> <%= item.quantity %></div>
+      <div> <%= item.drink.wholesale_price %></div>
+      <div> <%= item.drink.wholesale_price * item.quantity %> </div>
+    <% end %>
+    
+    <div class="font-bold text-xl ">TOTAL</div><div></div><div></div><div class="font-bold text-xl"> <%= command_total(command) %></div>
+  </div>
+  <% if action_name != "show" %>
+    <%= link_to "Show this command", command, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= link_to 'Edit this command', edit_command_path(command), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+    <hr class="mt-6">
+  <% end %>
+</div>

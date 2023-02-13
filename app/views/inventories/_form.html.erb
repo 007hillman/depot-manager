@@ -1,0 +1,32 @@
+<%= form_with(model: inventory, class: "contents") do |form| %>
+  <% if inventory.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
+      <h2><%= pluralize(inventory.errors.count, "error") %> prohibited this inventory from being saved:</h2>
+
+      <ul>
+        <% inventory.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="my-5">
+    <%= form.label :drink_id %>
+    <%= form.select :drink_id,options_for_select(Drink.all.map {|drink| [drink.name, drink.id]}),{},{ class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full"} %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :quantity %>
+    <%= form.text_field :quantity, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :action %>
+    <%= form.select :action,options_for_select([["purchased","purchase"],["sold","sold"]]),{},{ class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full"} %>
+  </div>
+
+  <div class="inline">
+    <%= form.submit "Add record", class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer bg-yellow-600 text-white" %>
+  </div>
+<% end %>
