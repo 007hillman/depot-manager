@@ -1,21 +1,40 @@
 <section class="w-full ">
+
   <span class="inline-block bg-gray-600 text-white font-bold px-2 mb-4">Actions : </span>
-  <section class="buttons w-full flex justify-between mb-8">
-    <div class="inline-block w-1/4 flex flex-col border border-green-400 p-5">
-      <p>Rapidly check the prices of certain good by name. </p>
-      <hr>
-      <%= link_to "Check price",drinks_path, class: "inline-block text-white border bg-green-400 px-8 py-2 cursor-pointer"%>
-    </div>
-    <div class="inline-block w-1/4 flex flex-col border border-yellow-300 p-5">
-      <p>Rapid look up of the list of debtors and even search debtors by name </p>
-      <hr>
-      <%= link_to "Transactions", debts_path, class: "inline-block text-white bg-yellow-300 px-8 py-2 cursor-pointer font-bold" %>
-    </div>
-    <div class="inline-block w-1/4 flex flex-col border border-gray-900 p-5">
-      <p>Register new stock immediately they arrive from the distributor </p>
-      <hr>
-      <%= link_to "Inventory", inventories_path, class: "inline-block text-yellow-500 bg-gray-900 px-8 py-2 cursor-pointer font-bold" %>
-    </div>
+  <section class="buttons w-full flex flex-wrap gap-4 justify-between mb-8">
+        <a class="border-4 border-green-400 inline-block w-full md:w-1/4 rounded-r-full rounded-l-full flex parent hover:bg-green-400 cursor-pointer hover:font-bold transition-all duration-500" href="/drinks">
+          <div class="flex items-center justify-center inline-block border-4 border-green-400 rounded-full w-10 h-10 ">
+            <ion-icon name="pricetag-outline"></ion-icon>
+          </div>
+          <div class="flex items-center pl-4">
+            Check price
+          </div>
+        </a>
+        <a class="border-4 border-blue-400 inline-block w-full md:w-1/4 rounded-r-full rounded-l-full flex parent hover:bg-blue-400 cursor-pointer hover:font-bold" href="/commands">
+          <div class="flex items-center justify-center inline-block border-4 border-blue-400 rounded-full w-10 h-10 ">
+            <ion-icon name="cart-outline"></ion-icon>
+          </div>
+          <div class="flex items-center pl-4">
+            Commands
+          </div>
+        </a>
+        <div class="border border-green-400 inline-block w-full md:w-1/4 rounded-r-full rounded-l-full flex parent hover:bg-green-400 cursor-pointer">
+          <div class="flex items-center justify-center inline-block border border-green-400 rounded-full w-10 h-10 ">
+            <ion-icon name="pricetag-outline"></ion-icon>
+          </div>
+          <div class="flex items-center pl-4">
+            Check price
+          </div>
+        </div>
+        <div class="border border-green-400 inline-block w-full md:w-1/4 rounded-r-full rounded-l-full flex parent hover:bg-green-400 cursor-pointer">
+          <div class="flex items-center justify-center inline-block border border-green-400 rounded-full w-10 h-10 ">
+            <ion-icon name="pricetag-outline"></ion-icon>
+          </div>
+          <div class="flex items-center pl-4">
+            Check price
+          </div>
+        </div>
+   
   </section>
 
   <span class="inline-block bg-gray-600 text-white font-bold px-2 mb-4">Reminders : </span>

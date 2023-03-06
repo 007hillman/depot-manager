@@ -1,5 +1,9 @@
 {
   "dependencies": {
-    "@nathanvda/cocoon": "^1.2.14"
+    "@nathanvda/cocoon": "^1.2.14",
+    "@rails/actiontext": "^7.0.4-2",
+    "slim-select": "^2.4.2",
+    "stimulus-slimselect": "^0.2.0",
+    "trix": "^2.0.4"
   }
 }

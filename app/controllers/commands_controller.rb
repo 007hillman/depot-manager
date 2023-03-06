@@ -3,7 +3,15 @@ class CommandsController < ApplicationController
 
   # GET /commands or /commands.json
   def index
-    @commands = Command.all
+    if params[:query]
+      @commmands = Command.global_search(params[:query])
+    else
+      @commands = Command.all
+    end
+    respond_to do |format|
+      format.html
+      format.json { render json: { commands: @commands } }
+    end
   end
 
   # GET /commands/1 or /commands/1.json
@@ -25,7 +33,7 @@ class CommandsController < ApplicationController
   # POST /commands or /commands.json
   def create
     @command = Command.new(command_params)
-
+    @payment = Payment.new(client_name: @command.client_name, amount_paid: @command.amount_paid, command: @command)
     respond_to do |format|
       if @command.save
         format.html { redirect_to command_url(@command), notice: "Command was successfully created." }
@@ -59,7 +67,7 @@ class CommandsController < ApplicationController
       format.json { head :no_content }
     end
   end
-
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_command
@@ -68,6 +76,6 @@ class CommandsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def command_params
-      params.require(:command).permit(:client_name,:amount_paid, :payment_method, items_attributes: [:id,:quantity,:drink_id,:_destroy])
+      params.require(:command).permit(:client_name,:amount_paid, :payment_method, :brasseries_crates_given, :guinness_crates_given, items_attributes: [:id,:quantity,:drink_id,:_destroy])
     end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_09_221638) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_28_203242) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -63,8 +63,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_09_221638) do
     t.string "client_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.decimal "amount_paid"
     t.string "payment_method"
+    t.decimal "brasseries_crates_given", default: "0.0"
+    t.decimal "guinness_crates_given", default: "0.0"
+    t.decimal "amount_paid", default: "0.0"
   end
 
   create_table "debts", force: :cascade do |t|
@@ -88,6 +90,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_09_221638) do
     t.datetime "updated_at", null: false
     t.integer "number_per_package"
     t.string "container_type"
+    t.string "abbreviation", default: "ITM"
   end
 
   create_table "inventories", force: :cascade do |t|
@@ -109,6 +112,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_09_221638) do
     t.index ["drink_id"], name: "index_items_on_drink_id"
   end
 
+  create_table "payments", force: :cascade do |t|
+    t.bigint "command_id", null: false
+    t.decimal "amount_paid"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "client_name"
+    t.index ["command_id"], name: "index_payments_on_command_id"
+  end
+
   create_table "reminders", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -125,4 +137,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_09_221638) do
   add_foreign_key "inventories", "drinks"
   add_foreign_key "items", "commands"
   add_foreign_key "items", "drinks"
+  add_foreign_key "payments", "commands"
 end

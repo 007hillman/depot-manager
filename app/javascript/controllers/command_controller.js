@@ -1,9 +1,11 @@
 import { Controller } from "@hotwired/stimulus"
+var array = []
 
 // Connects to data-controller="command"
 export default class extends Controller {
-static targets = ["itemRow", "template", "items"]
+static targets = ["itemRow", "template", "items", "query"]
   connect() {
+    
   }
   
   deleteRow(event){

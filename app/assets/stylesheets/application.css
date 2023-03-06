@@ -14,3 +14,28 @@
  *= require_self
  */
  @import url('https://fonts.googleapis.com/css2?family=Rubik+Bubbles&display=swap');
+ @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+ body{
+    font-family: 'Poppins', Helvetica, sans-serif;
+    font-size: 1.2em;
+ }
+ .list{
+    overflow-y: scroll;
+    /* top: -300px; */
+    padding: 10px 5px;
+    
+}
+.list > option{
+    padding: 5px 10px;
+}
+.list > option:hover {
+    background-color: white;
+    color: #282826;
+    border-radius: 5px;
+    border-left: solid gold 3px;
+}
+li:nth-child(odd) { background: #f3f4f6; }
+.parent:hover > div{
+    border-color: white;
+    color: white;
+}

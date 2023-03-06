@@ -5,10 +5,33 @@
 
   <div class="flex justify-between items-center">
     <h1 class="font-bold text-4xl">Commands</h1>
-    <%= link_to 'New command', new_command_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+    <%= link_to 'New command', new_command_path, class: "rounded-lg py-2 px-5 bg-blue-600 text-white block font-medium" %>
   </div>
-
+  <div class="grid grid-cols-4 mt-20 bg-gray-900 text-white text-xl py-3 font-bold">
+    <div class="text-center">client name</div> <div class="text-center">payment method</div> <div class="text-center">amount paid</div> <div class="text-center">Items bought</div>
+  </div>
   <div id="commands" class="min-w-full">
-    <%= render @commands %>
+    <ul>
+      <% @commands.each do |command| %>
+      <li class="hover:text-blue-300 hover:bg-gray-900">
+
+        <%= link_to command , class: "grid grid-cols-4 py-3" do %>
+            <div class="text-center"><%= command.client_name %></div>
+            <div class="text-center"><%= command.payment_method%></div>
+            <div class="text-center"><%= command.amount_paid%></div>
+            <div class="text-center">
+              <select name="" id="" class="block shadow rounded-md border border-gray-200 outline-none px-3 py-2 w-full bg-inherit">
+                <%= command.items.each do |item| %>
+                  <option><%= Drink.find(item.drink_id).name%></option>
+                <% end %>
+              </select>
+            </div>
+
+        <% end %>
+      </li>
+
+      <% end %>
+    </ul>
+
   </div>
 </div>

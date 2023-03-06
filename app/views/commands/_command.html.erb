@@ -1,20 +1,29 @@
-<div id="<%= dom_id command %>">
+<div id="<%= dom_id command %>" class=" w-full">
   <p class="my-5">
     <strong class=" font-bold mb-1">Client name:</strong>
     <%= command.client_name %>
   </p>
-  <div class="grid grid-cols-4">
-    <div> Item</div> <div> Quantity</div> <div>Unit price</div> <div> Total price</div>
+  <div class="grid grid-cols-5 uppercase font-black text-white bg-gray-900">
+    <div class="col-span-2 pl-4"> Item</div> <div> Quantity</div> <div>Unit price</div> <div> Total price</div>
   </div>
-  <div class="grid grid-cols-4 gap-10">
+  <div class="w-full">
+  <ul class="">
     <% command.items.each do |item|%>
-      <div> <%= item.drink.name %> </div>
+    <li class="hover:text-blue-300 hover:bg-gray-900 grid grid-cols-5 gap-10 py-2 ">
+      <div class="col-span-2 pl-5"> <%= item.drink.name %> </div>
       <div> <%= item.quantity %></div>
       <div> <%= item.drink.wholesale_price %></div>
       <div> <%= item.drink.wholesale_price * item.quantity %> </div>
-    <% end %>
+    </li>
     
-    <div class="font-bold text-xl ">TOTAL</div><div></div><div></div><div class="font-bold text-xl"> <%= command_total(command) %></div>
+    <% end %>
+  </ul>
+    
+  </div>
+  <div class="grid grid-cols-5">
+    <div class="font-bold text-xl col-span-2 ">TOTAL : </div><div></div><div></div><div class="font-bold text-xl"> <%= command_total(command) %></div>
+    <div class="font-bold text-xl col-span-2 "> Amount paid :</div><div></div><div></div><div class="font-bold text-xl"> <%= command.amount_paid %></div>
+    <div class="font-bold text-xl col-span-2 "> Amount Owed :</div><div></div><div></div><div class="font-bold text-xl"> <%= command_total(command) - command.amount_paid %></div>
   </div>
   <% if action_name != "show" %>
     <%= link_to "Show this command", command, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>

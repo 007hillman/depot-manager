@@ -4,9 +4,9 @@ class DrinksController < ApplicationController
   # GET /drinks or /drinks.json
   def index
     if params[:query]
-      @drinks= Drink.global_search(params[:query])
+      @drinks= Drink.global_search(params[:query]).order("name")
     else
-      @drinks = Drink.all
+      @drinks = Drink.all.order("name")
     end
     if turbo_frame_request?
       render partial: "bands", locals: { bands: @bands }
@@ -74,6 +74,6 @@ class DrinksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def drink_params
-      params.require(:drink).permit(:name, :supplyer, :size, :packaging, :alcoholic, :retail_price, :wholesale_price, :number_per_package, :container_type)
+      params.require(:drink).permit(:name, :supplyer, :size, :packaging, :alcoholic, :retail_price, :wholesale_price, :number_per_package, :container_type, :abbreviation)
     end
 end
