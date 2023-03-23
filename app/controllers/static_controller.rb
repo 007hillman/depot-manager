@@ -5,6 +5,7 @@ class StaticController < ApplicationController
   end
   def check
   end
+
   def transaction_summary
     @debts = Debt.all
     @cash_out = 0
@@ -100,6 +101,7 @@ end
       }
   end
 end
+
 end
 # @command = Command.find(params[:id])
 # @items = @command.items

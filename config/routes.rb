@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :payments
   resources :commands
   resources :inventories
   resources :drinks
@@ -9,6 +10,7 @@ Rails.application.routes.draw do
   get 'static/check', to: 'static#check'
   get 'static/home'
   get 'static/receipt', to: 'static#receipt'
+
   get 'static/transaction_summary'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

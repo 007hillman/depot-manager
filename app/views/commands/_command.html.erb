@@ -3,6 +3,10 @@
     <strong class=" font-bold mb-1">Client name:</strong>
     <%= command.client_name %>
   </p>
+    <p class="my-5">
+    <strong class=" font-bold mb-1">Command date:</strong>
+    <%= command.created_at.strftime("%A, %d %B %Y") %>
+  </p>
   <div class="grid grid-cols-5 uppercase font-black text-white bg-gray-900">
     <div class="col-span-2 pl-4"> Item</div> <div> Quantity</div> <div>Unit price</div> <div> Total price</div>
   </div>

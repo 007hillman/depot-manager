@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_28_203242) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_20_224927) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -57,6 +57,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_28_203242) do
     t.string "telephone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "location", default: "Clerk's quarters ,Buea"
   end
 
   create_table "commands", force: :cascade do |t|
@@ -91,6 +92,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_28_203242) do
     t.integer "number_per_package"
     t.string "container_type"
     t.string "abbreviation", default: "ITM"
+    t.decimal "buying_cost", default: "0.0"
+    t.decimal "safe_quantity", default: "0.0"
   end
 
   create_table "inventories", force: :cascade do |t|
@@ -99,6 +102,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_28_203242) do
     t.string "action"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "com"
     t.index ["drink_id"], name: "index_inventories_on_drink_id"
   end
 
@@ -113,11 +117,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_28_203242) do
   end
 
   create_table "payments", force: :cascade do |t|
-    t.bigint "command_id", null: false
+    t.bigint "client_id", null: false
     t.decimal "amount_paid"
+    t.bigint "command_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "client_name"
+    t.index ["client_id"], name: "index_payments_on_client_id"
     t.index ["command_id"], name: "index_payments_on_command_id"
   end
 
@@ -137,5 +142,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_28_203242) do
   add_foreign_key "inventories", "drinks"
   add_foreign_key "items", "commands"
   add_foreign_key "items", "drinks"
+  add_foreign_key "payments", "clients"
   add_foreign_key "payments", "commands"
 end

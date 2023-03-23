@@ -8,7 +8,17 @@
     <%= link_to 'New client', new_client_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
   </div>
 
-  <div id="clients" class="min-w-full">
-    <%= render @clients %>
+  <div id="clients" class="min-w-full mt-10">
+    <ul class="grid grid-cols-4 gap-4">
+      <% @clients.each do |client| %>
+        <li class="border-2 border-blue-600 rounded-md  hover:text-gray-200 hover:bg-gray-900 px-6">
+          <%= link_to client do %>
+            <div><span class="font-bold">Name : </span> <%= client.name %></div>
+            <div><span class="font-bold">Location : </span> <%= client.location %></div>
+
+          <% end %>  
+        </li>
+      <% end %>
+    </ul>
   </div>
 </div>

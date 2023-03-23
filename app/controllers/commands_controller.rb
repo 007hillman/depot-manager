@@ -6,7 +6,7 @@ class CommandsController < ApplicationController
     if params[:query]
       @commmands = Command.global_search(params[:query])
     else
-      @commands = Command.all
+      @commands = Command.all.order("created_at DESC")
     end
     respond_to do |format|
       format.html
@@ -33,7 +33,6 @@ class CommandsController < ApplicationController
   # POST /commands or /commands.json
   def create
     @command = Command.new(command_params)
-    @payment = Payment.new(client_name: @command.client_name, amount_paid: @command.amount_paid, command: @command)
     respond_to do |format|
       if @command.save
         format.html { redirect_to command_url(@command), notice: "Command was successfully created." }
