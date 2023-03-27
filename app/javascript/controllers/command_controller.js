@@ -20,4 +20,27 @@ static targets = ["itemRow", "template", "items", "query"]
   	var content = this.itemRowTarget.innerHTML.replace(/TEMPLATE_RECORD/g, new Date().getTime())
   	this.itemsTarget.insertAdjacentHTML('beforebegin',content)
   }
-}
+  async search_client(event){
+    const value = event.target.value
+    const list = document.querySelector("#result")
+    list.innerHTML = ""
+    await fetch (`http://localhost:3000/commands/?query=${value}`, {
+        headers: { accept: 'application/json'},
+    }).then((response) => response.json()).then((data)=>{
+      data.commands.forEach(command => {
+        let item = document.createElement('li')
+        item.innerText =command.client_name
+        item.setAttribute("data-action","click->command#select")
+        list.appendChild(item)
+      });
+    })
+  }
+  select(event){
+    const nom = event.target.innerText
+    document.querySelector("#search_field").value = nom
+    const list = document.querySelector("#result")
+    list.innerHTML = ""
+    document.querySelector("#search_field").focus()
+  }
+  
+  }

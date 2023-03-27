@@ -14,6 +14,8 @@
 <hr>
 <h1 class="uppercase font-semibold my-5">Transaction History</h1>
 
-
+<%@commands.each do |command| %>
+  <div> <%= link_to command.created_at.strftime("%A, %d %B %Y") , command_path(command) %></div>
+<% end %>
   </div>
 </div>

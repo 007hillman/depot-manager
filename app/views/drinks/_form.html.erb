@@ -46,7 +46,10 @@
     <%= form.label "Is it alcoholic? : ", class: "font-bold" %>
     <%= form.check_box :alcoholic, class: "block mt-2 h-5 w-5" %>
   </div>
-
+  <div class="my-5">
+    <%= form.label :safe_quantity , class: "font-bold"%>
+    <%= form.text_field :safe_quantity, class: "block shadow rounded-md border border-gray-300 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
   <div class="my-5">
     <%= form.label :retail_price , class: "font-bold"%>
     <%= form.text_field :retail_price, class: "block shadow rounded-md border border-gray-300 outline-none px-3 py-2 mt-2 w-full" %>

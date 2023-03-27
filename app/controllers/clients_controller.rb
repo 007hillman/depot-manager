@@ -16,6 +16,7 @@ class ClientsController < ApplicationController
 
   # GET /clients/1 or /clients/1.json
   def show
+    @commands = Command.global_search(@client.name).order("created_at ASC")
   end
 
   # GET /clients/new

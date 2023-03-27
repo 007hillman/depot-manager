@@ -25,6 +25,7 @@ class PaymentsController < ApplicationController
 
     respond_to do |format|
       if @payment.save
+        Transaction.create(amount: @payment.amount_paid,client_id: @payment.client_id, payment_id: @payment.id)
         format.html { redirect_to payment_url(@payment), notice: "Payment was successfully created." }
         format.json { render :show, status: :created, location: @payment }
       else

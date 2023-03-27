@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_20_224927) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_23_220004) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -137,6 +137,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_20_224927) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "transactions", force: :cascade do |t|
+    t.decimal "amount"
+    t.string "type", default: "Money"
+    t.string "direction", default: "In"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "client_id", null: false
+    t.bigint "payment_id", null: false
+    t.index ["client_id"], name: "index_transactions_on_client_id"
+    t.index ["payment_id"], name: "index_transactions_on_payment_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "inventories", "drinks"
@@ -144,4 +156,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_20_224927) do
   add_foreign_key "items", "drinks"
   add_foreign_key "payments", "clients"
   add_foreign_key "payments", "commands"
+  add_foreign_key "transactions", "clients"
+  add_foreign_key "transactions", "payments"
 end
