@@ -3,15 +3,26 @@
     <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
   <% end %>
 
-  <div class="flex justify-between items-center gap-5">
+  <div class="flex justify-between items-center gap-5 ">
     <h1 class="font-bold text-4xl">Commands</h1>
     <input type="text" name="" id="search_field" data-action="keyup->command#search_client" class="inline-block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 grow" placeholder="enter a client name to view their commmands">
     <%= link_to 'New command', new_command_path, class: "rounded-lg py-2 px-5 bg-blue-600 text-white block font-medium" %>
   </div>
+  <div class="mt-10 flex justify-between">
+    <form action="/commands" method="get">
+      <input type="date" name="search_date" id="search_date" value= "<%= @date%>">
+      <button type="submit" class="rounded-lg py-2 px-5 bg-red-400 text-white inline-block font-medium cursor-pointer"> show commands for this date</button>
+    </form>
+    <%= link_to "show all commands", commands_path(message: "all")%>
+  </div>
   <ul id="result"></ul>
-  <div class="grid grid-cols-4 mt-20 bg-gray-900 text-white text-xl py-3 font-bold">
+      <div>
+    Total sales today : <%= total_sales(@commands) %>
+  </div>
+  <div class="grid grid-cols-4 mt-10 bg-gray-900 text-white text-xl py-3 font-bold">
     <div class="text-center">client name</div> <div class="text-center">Payment method</div> <div class="text-center">Date </div> <div class="text-center">Items bought</div>
   </div>
+
   <div id="commands" class="min-w-full">
     <ul>
       <% @commands.each do |command| %>

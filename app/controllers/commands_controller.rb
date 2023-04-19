@@ -5,8 +5,16 @@ class CommandsController < ApplicationController
   def index
     if params[:query]
       @commands = Command.global_search(params[:query])
+    elsif params[:search_date]
+      @commands = Command.all.order("created_at DESC").select {|x| x.created_at.strftime("%Y-%m-%d") == params[:search_date] }
+      @date = params[:search_date]
+    elsif params[:message]
+      if params[:message] == "all"
+        @commands= Command.all.order("created_at DESC")
+      end
     else
-      @commands = Command.all.order("created_at DESC")
+      @commands = Command.all.order("created_at DESC").select {|x| x.created_at.strftime("%Y-%m-%d") == Date.today.strftime("%Y-%m-%d") }
+      @date = Date.today.strftime("%Y-%m-%d")
     end
     respond_to do |format|
       format.html
@@ -33,6 +41,9 @@ class CommandsController < ApplicationController
   # POST /commands or /commands.json
   def create
     @command = Command.new(command_params)
+    if command_params[:paid]  == 1.to_s
+      @command.amount_paid = command_total(@command)
+    end
     
     respond_to do |format|
       if @command.save
@@ -47,8 +58,19 @@ class CommandsController < ApplicationController
 
   # PATCH/PUT /commands/1 or /commands/1.json
   def update
+
     respond_to do |format|
+
       if @command.update(command_params)
+        if command_params[:paid] == 1.to_s
+          c = Command.find(@command.id)
+          c.amount_paid = CommandsController.command_total(@command)
+          c.save
+        else
+          c = Command.find(@command.id)
+          c.amount_paid = command_params[:amount_paid]
+          c.save  
+        end
         format.html { redirect_to command_url(@command), notice: "Command was successfully updated." }
         format.json { render :show, status: :ok, location: @command }
       else
@@ -72,10 +94,22 @@ class CommandsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_command
       @command = Command.find(params[:id])
+      
     end
 
     # Only allow a list of trusted parameters through.
     def command_params
-      params.require(:command).permit(:client_name,:amount_paid, :payment_method, :brasseries_crates_given, :guinness_crates_given, items_attributes: [:id,:quantity,:drink_id,:_destroy])
+      params.require(:command).permit(:client_name,:amount_paid,:paid, :payment_method, :brasseries_crates_given, :guinness_crates_given,:remark ,items_attributes: [:id,:quantity,:drink_id,:bottles,:_destroy])
     end
+    def self.command_total(c)
+      sum = 0
+      c.items.each do |item|
+          if item.bottles
+              sum += (item.quantity/item.drink.number_per_package) * item.drink.wholesale_price
+          else
+              sum += item.quantity * item.drink.wholesale_price
+          end
+      end
+      return sum.round(1)
+  end
 end

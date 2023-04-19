@@ -14,7 +14,7 @@
     <button class="bg-gray-100 font-bold px-3 py-1 rounded-l-full" data-action="click->debts#hide_mod2">X</button>
   </div>
   <div class="flex justify-center items-center gap-4 w-full h-full">
-    <%= link_to "Supermont", new_payment_url , class: "bg-yellow-400 uppercase font-regular text-white px-20 py-10 bg-opacity-50 hover:font-bold hover:bg-opacity-90"%>
+    <%= link_to "Supermont", "#" , class: "bg-yellow-400 uppercase font-regular text-white px-20 py-10 bg-opacity-50 hover:font-bold hover:bg-opacity-90"%>
     <button class="bg-red-700 uppercase font-regular text-white px-20 py-10 bg-opacity-50 hover:font-bold hover:bg-opacity-90">Brasseries</button>
   </div>
 
@@ -26,7 +26,7 @@
             <ion-icon name="pricetags-outline"></ion-icon>
           </div>
           <div class="flex items-center pl-4">
-            Check price
+            Drinks
           </div>
         </a>
         <a class="border-4 border-blue-400 inline-block w-full md:w-1/4 rounded-r-full rounded-l-full flex parent hover:bg-blue-400 cursor-pointer hover:font-bold" href="/commands">
@@ -43,6 +43,14 @@
           </div>
           <div class="flex items-center pl-4">
             Clients
+          </div>
+        </a>
+        <a class="border-4 border-gray-400 inline-block w-full md:w-1/4 rounded-r-full rounded-l-full flex parent hover:bg-gray-400 cursor-pointer hover:font-bold" href="/crates">
+          <div class="flex items-center justify-center inline-block border-4 border-gray-400 rounded-full w-10 h-10 ">
+            <ion-icon name="person-outline"></ion-icon>
+          </div>
+          <div class="flex items-center pl-4">
+            Crates
           </div>
         </a>
         <a class="border-4 border-yellow-400 inline-block w-full md:w-1/4 rounded-r-full rounded-l-full flex parent hover:bg-yellow-400 cursor-pointer hover:font-bold" href="#" data-action="click->debts#show_modal">

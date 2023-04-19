@@ -17,38 +17,40 @@
     </div>
 <% end %>
 <hr>
-  <div class="grid md:grid-cols-8">
-    <p class="my-5">
+  <div class="grid md:grid-cols-4 bg-gray-800 text-white font-semibold uppercase">
+    <p class="my-3">
       <strong class="block font-medium mb-1">Name:</strong>
     </p>
   
-    <p class="my-5">
+    <p class="my-3">
       <strong class="block font-medium mb-1">Supplyer:</strong>
     </p>
   
-    <p class="my-5">
-      <strong class="block font-medium mb-1">Size:</strong>
-    </p>
-  
-    <p class="my-5">
-      <strong class="block font-medium mb-1">Packaging:</strong>
-    </p>
-  
-    <p class="my-5">
-      <strong class="block font-medium mb-1">Alcoholic:</strong>
-    </p>
-  
-    <p class="my-5">
+    <p class="my-3">
       <strong class="block font-medium mb-1">Retail price:</strong>
     </p>
   
-    <p class="my-5">
+    <p class="my-3">
       <strong class="block font-medium mb-1">Wholesale price:</strong>
     </p>
   </div>
   <div id="drinks" class="min-w-full">
     <%= turbo_frame_tag "drinks" do %>
-      <%= render @drinks %>
+    <ul class="mt-5">
+      <% @drinks.each do |drink|%>
+        <li class="py-2 hover:bg-blue-900 hover:text-white hover:font-semibold">
+          <%= link_to drink do %>
+            <div class="grid grid-cols-4">
+              <div><%= drink.name %></div>
+              <div><%= drink.supplyer%></div>
+              <div><%= drink.retail_price%></div>
+              <div><%= drink.wholesale_price %></div>
+
+            </div>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
     <% end %>
   </div>
 </div>

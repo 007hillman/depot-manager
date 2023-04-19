@@ -7,6 +7,7 @@
     <strong class=" font-bold mb-1">Command date:</strong>
     <%= command.created_at.strftime("%A, %d %B %Y") %>
   </p>
+
   <div class="grid grid-cols-5 uppercase font-black text-white bg-gray-900">
     <div class="col-span-2 pl-4"> Item</div> <div> Quantity</div> <div>Unit price</div> <div> Total price</div>
   </div>
@@ -15,9 +16,18 @@
     <% command.items.each do |item|%>
     <li class="hover:text-blue-300 hover:bg-gray-900 grid grid-cols-5 gap-10 py-2 ">
       <div class="col-span-2 pl-5"> <%= item.drink.name %> </div>
-      <div> <%= item.quantity %></div>
+      <%if item.bottles %>
+      <div> <%= item.quantity%> bottles</div> 
+      <% else %>
+      <div> <%= item.quantity%></div>
+
+      <% end %>
       <div> <%= item.drink.wholesale_price %></div>
-      <div> <%= item.drink.wholesale_price * item.quantity %> </div>
+      <% if item.bottles %>
+        <div> <%= (item.drink.wholesale_price * item.quantity/item.drink.number_per_package).round(2) %> </div>
+      <% else %>
+        <div> <%= item.drink.wholesale_price * item.quantity %> </div>
+      <% end %>
     </li>
     
     <% end %>
@@ -35,3 +45,7 @@
     <hr class="mt-6">
   <% end %>
 </div>
+  <p class="my-5 flex">
+    <strong class=" font-bold mb-1">Comment : </strong>
+   <span> <%= command.remark %> </span> 
+  </p>

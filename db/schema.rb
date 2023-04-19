@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_23_220004) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_19_135203) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -68,6 +68,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_23_220004) do
     t.decimal "brasseries_crates_given", default: "0.0"
     t.decimal "guinness_crates_given", default: "0.0"
     t.decimal "amount_paid", default: "0.0"
+    t.boolean "paid"
+  end
+
+  create_table "crates", force: :cascade do |t|
+    t.bigint "client_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.decimal "brasseries_crates"
+    t.decimal "guinness_crates"
+    t.string "action", default: "delivered"
+    t.index ["client_id"], name: "index_crates_on_client_id"
   end
 
   create_table "debts", force: :cascade do |t|
@@ -112,6 +123,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_23_220004) do
     t.decimal "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "bottles"
     t.index ["command_id"], name: "index_items_on_command_id"
     t.index ["drink_id"], name: "index_items_on_drink_id"
   end
@@ -151,6 +163,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_23_220004) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "crates", "clients"
   add_foreign_key "inventories", "drinks"
   add_foreign_key "items", "commands"
   add_foreign_key "items", "drinks"

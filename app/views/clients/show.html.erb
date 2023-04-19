@@ -1,4 +1,4 @@
-<div class=" w-full flex ">
+<div class=" w-full flex mb-20">
   <div class="mx-20 w-full">
     <% if notice.present? %>
       <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
@@ -13,9 +13,24 @@
     <%= render @client %>
 <hr>
 <h1 class="uppercase font-semibold my-5">Transaction History</h1>
-
-<%@commands.each do |command| %>
-  <div> <%= link_to command.created_at.strftime("%A, %d %B %Y") , command_path(command) %></div>
-<% end %>
+  <div class="grid grid-cols-5 uppercase font-black text-white bg-gray-900">
+    <div class="col-span-2 pl-4"> Date</div> <div> Goods amount</div> <div>Amount paid</div> <div> Amount Owed</div>
   </div>
+<ul class="mb-10">
+  <%@commands.order("created_at desc").each do |command| %>
+    <%= link_to command_path(command) do %>
+    <li class="hover:text-blue-300 hover:bg-gray-900 grid grid-cols-5 gap-10 py-2">
+      <div class="col-span-2"> <%= command.created_at.strftime("%A, %d %B %Y") %></div>
+      <div> <%= command_total(command) %> </div>
+      <div> <%= command.amount_paid%> </div>
+      <div> <%= command_total(command) - command.amount_paid %> </div>
+    </li>
+    <% end %>
+  <% end %>
+</ul>
+    <div>
+      Total amount owed : <%= total_owed(@client.name) %>
+    </div>
+    </div>
+
 </div>

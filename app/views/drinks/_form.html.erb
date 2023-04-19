@@ -38,6 +38,10 @@
     <%= form.label :number_per_package , class: "font-bold" %> 
     <%= form.select :number_per_package, options_for_select([["1",1],["6", 6],["12",12],["15",15],["24",24]], selected: form.object.number_per_package),{},{class: "block shadow rounded-md border border-gray-300 outline-none px-3 py-2 mt-2 w-full"} %> 
   </div>
+  <div class="my-5">
+    <%= form.label "required quantity" , class: "font-bold"%>
+    <%= form.text_field :safe_quantity, class: "block shadow rounded-md border border-gray-300 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
     <div class="my-5">
     <%= form.label :abbreviation , class: "font-bold" %> 
     <%= form.text_field :abbreviation, class: "block shadow rounded-md border border-gray-300 outline-none px-3 py-2 mt-2 w-full", placeholder:"in litres" , data: {drinks_target: "abbr"}%> 
@@ -46,6 +50,11 @@
     <%= form.label "Is it alcoholic? : ", class: "font-bold" %>
     <%= form.check_box :alcoholic, class: "block mt-2 h-5 w-5" %>
   </div>
+    <div class="my-5">
+    <%= form.label "cost per unit" , class: "font-bold"%>
+    <%= form.text_field :buying_cost, class: "block shadow rounded-md border border-gray-300 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+  
   <div class="my-5">
     <%= form.label :safe_quantity , class: "font-bold"%>
     <%= form.text_field :safe_quantity, class: "block shadow rounded-md border border-gray-300 outline-none px-3 py-2 mt-2 w-full" %>

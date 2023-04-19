@@ -17,6 +17,7 @@ class DrinksController < ApplicationController
 
   # GET /drinks/1 or /drinks/1.json
   def show
+    @commands = Command.all.order("created_at desc")
   end
 
   # GET /drinks/new
@@ -74,6 +75,6 @@ class DrinksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def drink_params
-      params.require(:drink).permit(:name, :supplyer, :size, :packaging, :alcoholic, :retail_price, :wholesale_price, :number_per_package, :container_type,:safe_quantity, :abbreviation)
+      params.require(:drink).permit(:name, :supplyer, :size, :packaging, :alcoholic, :retail_price, :wholesale_price, :number_per_package, :container_type,:safe_quantity, :abbreviation, :buying_cost)
     end
 end

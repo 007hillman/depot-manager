@@ -11,13 +11,23 @@
   <div id="clients" class="min-w-full mt-10">
     <ul class="grid grid-cols-4 gap-4">
       <% @clients.each do |client| %>
-        <li class="border-2 border-blue-600 rounded-md  hover:text-gray-200 hover:bg-gray-900 px-6">
+        <% if total_owed(client.name) > 0 %>
+        <div class="border-2 border-blue-600 rounded-md  hover:text-gray-200 hover:bg-gray-900 px-6 bg-red-400">
           <%= link_to client do %>
             <div><span class="font-bold">Name : </span> <%= client.name %></div>
             <div><span class="font-bold">Location : </span> <%= client.location %></div>
 
           <% end %>  
-        </li>
+        </div>
+        <% else %>
+        <div class="border-2 border-blue-600 rounded-md  hover:text-gray-200 hover:bg-gray-900 px-6">
+          <%= link_to client do %>
+            <div><span class="font-bold">Name : </span> <%= client.name %></div>
+            <div><span class="font-bold">Location : </span> <%= client.location %></div>
+
+          <% end %>  
+        </div>
+        <% end %>
       <% end %>
     </ul>
   </div>

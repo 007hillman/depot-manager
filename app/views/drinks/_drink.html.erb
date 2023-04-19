@@ -1,31 +1,15 @@
-<div id="<%= dom_id drink %>" class="grid md:grid-cols-8">
-  <p class="my-5">
-    <%= drink.name %>
-  </p>
+<section class="grid grid-cols-8 gap-y-5 mb-5">
+  <div class="col-span-4"> <span class="font-semibold">Name of drink : </span><%= drink.name %> </div>
+  <div class="col-span-4"> <span class="font-semibold"> Supplyer : </span><%= drink.supplyer %> </div>
+  <div class="col-span-2"> <span class="font-semibold">Volume : </span><%= drink.size.to_s + "Litres " %> </div>
+  <div class="col-span-3"> <span class="font-semibold"> Packaging type : </span><%= drink.packaging %> </div>
+  <div class="col-span-3"> <span class="font-semibold"> Has alcohol? : </span><%= drink.alcoholic ? "Yes" : "No"%> </div>
+  <div class="col-span-4"> <span class="font-semibold"> Inside  : </span><%= drink.number_per_package.to_s + " " + drink.container_type + "(s)" %>  </div>
+  <div class="col-span-4"> <span class="font-semibold"> Safe quantity: </span><%= drink.safe_quantity %> </div>
+  <div class="col-span-3"> <span class="font-semibold">Wholesale price : </span><%= drink.wholesale_price %> </div>
+  <div class="col-span-3"> <span class="font-semibold"> Retail price: </span><%= drink.retail_price  %> </div>
+</section>
 
-  <p class="my-5">
-    <%= drink.supplyer %>
-  </p>
-
-  <p class="my-5">
-    <%= drink.size %>
-  </p>
-
-  <p class="my-5">
-    <%= drink.packaging %>
-  </p>
-
-  <p class="my-5">
-    <%= drink.alcoholic %>
-  </p>
-
-  <p class="my-5">
-    <%= drink.retail_price %>
-  </p>
-
-  <p class="my-5">
-    <%= drink.wholesale_price %>
-  </p>
 
   <% if action_name != "show" %>
   <div>
@@ -38,5 +22,5 @@
   </div>
   
   <% end %>
-</div>
-    <hr class="mt-6">
+
+   
