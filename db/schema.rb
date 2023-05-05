@@ -10,9 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_19_135203) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_05_104301) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "accountings", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
@@ -69,6 +74,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_19_135203) do
     t.decimal "guinness_crates_given", default: "0.0"
     t.decimal "amount_paid", default: "0.0"
     t.boolean "paid"
+    t.boolean "government"
   end
 
   create_table "crates", force: :cascade do |t|
@@ -105,6 +111,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_19_135203) do
     t.string "abbreviation", default: "ITM"
     t.decimal "buying_cost", default: "0.0"
     t.decimal "safe_quantity", default: "0.0"
+    t.decimal "government_price", default: "0.0"
   end
 
   create_table "inventories", force: :cascade do |t|
@@ -131,9 +138,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_19_135203) do
   create_table "payments", force: :cascade do |t|
     t.bigint "client_id", null: false
     t.decimal "amount_paid"
-    t.bigint "command_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "command_id", null: false
     t.index ["client_id"], name: "index_payments_on_client_id"
     t.index ["command_id"], name: "index_payments_on_command_id"
   end
