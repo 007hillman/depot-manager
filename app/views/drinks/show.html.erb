@@ -20,22 +20,7 @@
     </div>
   <ul>
     <% sum = 0 %>
-    <% @commands.each do |command|%>  
-        <% command.items.each do |x| %>
-          <% if Drink.find(x.drink_id) == @drink %>
-      <li class="hover:bg-blue-800 hover:text-blue-200">
-            <%= link_to   command  do %>
-              <div class="grid grid-cols-3 ">
-                <div><%= command.created_at.strftime("%A, %d %B %Y") %></div>
-                <div><%= command.client_name%></div>
-                <div><%= x.quantity %> <%= x.bottles ? "Bottle(s) " : "" %></div> 
-              </div>
-              <% sum += x.bottles ? x.quantity/x.drink.number_per_package : x.quantity %>
-            <% end %>
-      </li>
-          <%end%>
-        <%end %>
-    <% end %>
+
   </ul>
   <div class="my-5">
     <%= "Total " + @drink.name + " bought is : " + sum.round(2).to_s + " " + @drink.packaging + "(s)" %>

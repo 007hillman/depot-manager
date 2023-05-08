@@ -50,6 +50,10 @@
         <%= form.label :remark , class: "inline-block  text-gray-900 font-bold text-xl"%>
         <%= form.rich_text_area :remark,class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full", placeholder: "Enter any information here which is worth noting about this command" %>
       </div>
+      <div class="flex flex-col gap-3 ">
+        <%= form.label :government, class: "block text-gray-900 font-bold text-xl"%>
+        <%= form.check_box :government, class: " shadow rounded-sm border border-gray-400 px-2 py-2 " %>
+      </div>
       <div class="grid grid-cols-2 gap-4">
         <div class="my-5">
           <%= form.label :brasseries_crates_given , class: "inline-block text-yellow-500 bg-gray-900"%>

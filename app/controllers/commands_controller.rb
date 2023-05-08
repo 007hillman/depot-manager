@@ -99,7 +99,7 @@ class CommandsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def command_params
-      params.require(:command).permit(:client_name,:amount_paid,:paid, :payment_method, :brasseries_crates_given, :guinness_crates_given,:remark ,items_attributes: [:id,:quantity,:drink_id,:government,:bottles,:_destroy])
+      params.require(:command).permit(:client_name,:amount_paid,:paid, :payment_method, :brasseries_crates_given, :guinness_crates_given,:government,:remark ,items_attributes: [:id,:quantity,:drink_id,:bottles,:_destroy])
     end
     def self.command_total(c)
       sum = 0

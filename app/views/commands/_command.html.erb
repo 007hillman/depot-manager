@@ -22,11 +22,23 @@
       <div> <%= item.quantity%></div>
 
       <% end %>
-      <div> <%= item.drink.wholesale_price %></div>
-      <% if item.bottles %>
-        <div> <%= (item.drink.wholesale_price * item.quantity/item.drink.number_per_package).round(2) %> </div>
+      <% if command.government %>
+        <div> <%= item.drink.government_price %></div>
       <% else %>
-        <div> <%= item.drink.wholesale_price * item.quantity %> </div>
+        <div> <%= item.drink.wholesale_price %></div>
+      <% end %>
+      <% if item.bottles %>
+        <% if command.government%>
+        <div> <%= (item.drink.government_price * item.quantity/item.drink.number_per_package).round(2) %> </div>
+        <% else %>
+                  <div> <%= (item.drink.wholesale_price * item.quantity/item.drink.number_per_package).round(2) %> </div>
+        <% end %>
+      <% else %>
+        <% if command.government %>
+          <div> <%= item.drink.government_price * item.quantity %> </div>
+        <% else %>
+          <div> <%= item.drink.wholesale_price * item.quantity %> </div>
+        <% end %>
       <% end %>
     </li>
     

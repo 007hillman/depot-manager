@@ -5,7 +5,11 @@ module CommandsHelper
             if item.bottles
                 sum += (item.quantity/item.drink.number_per_package) * item.drink.wholesale_price
             else
-                sum += item.quantity * item.drink.wholesale_price
+                if c.government
+                    sum += item.quantity * item.drink.government_price
+                else
+                    sum += item.quantity * item.drink.wholesale_price
+                end
             end
         end
         return sum.round(1)
