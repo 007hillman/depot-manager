@@ -65,6 +65,6 @@ class CratesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def crate_params
-      params.require(:crate).permit(:client_id, :brasseries_crates, :guinness_crates)
+      params.require(:crate).permit(:client_id, :brasseries_crates, :guinness_crates, :action)
     end
 end

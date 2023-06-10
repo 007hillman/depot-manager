@@ -8,6 +8,7 @@ static targets = ["itemRow", "template", "items", "query"]
     
   }
   
+  
   deleteRow(event){
   	event.preventDefault()
   	

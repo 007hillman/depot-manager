@@ -1,13 +1,20 @@
 <div id="<%= dom_id command %>" class=" w-full">
   <p class="my-5">
     <strong class=" font-bold mb-1">Client name:</strong>
-    <%= command.client_name %>
+    <%=link_to command.client_name, static_client_path(name: command.client_name) , class: " px-4 py-1 text-md text-blue-600 hover:text-gray-100 hover:bg-blue-600 hover:font-semibold"%>
   </p>
     <p class="my-5">
     <strong class=" font-bold mb-1">Command date:</strong>
     <%= command.created_at.strftime("%A, %d %B %Y") %>
   </p>
-
+  <turbo-frame id="crates">
+    <div class="grid grid-cols-5">
+      <div class="col-span-2"> Brasseries crates given : <%= command.brasseries_crates_given %> </div>
+      <div class="col-span-2"> Guinness crates given : <%= command.guinness_crates_given %> </div>
+    <%= link_to "Change", static_crates_path(id: command.id), class: " block text-gray-100 bg-gray-900 text-center px-auto hover:bg-gray-500 hover:text-bold" %> 
+    </div>
+  </turbo-frame>
+  <br>
   <div class="grid grid-cols-5 uppercase font-black text-white bg-gray-900">
     <div class="col-span-2 pl-4"> Item</div> <div> Quantity</div> <div>Unit price</div> <div> Total price</div>
   </div>
@@ -29,15 +36,15 @@
       <% end %>
       <% if item.bottles %>
         <% if command.government%>
-        <div> <%= (item.drink.government_price * item.quantity/item.drink.number_per_package).round(2) %> </div>
+        <div> <%= (item.drink.government_price * (item.quantity == nil ? 0 : item.quantity)/item.drink.number_per_package).round(2) %> </div>
         <% else %>
-                  <div> <%= (item.drink.wholesale_price * item.quantity/item.drink.number_per_package).round(2) %> </div>
+                  <div> <%= ((item.drink.retail_price - (item.discount == nil ? 0 : item.discount))* item.quantity).round(2) %> </div>
         <% end %>
       <% else %>
         <% if command.government %>
-          <div> <%= item.drink.government_price * item.quantity %> </div>
+          <div> <%= item.drink.government_price * (item.quantity == nil ? 0 : item.quantity) %> </div>
         <% else %>
-          <div> <%= item.drink.wholesale_price * item.quantity %> </div>
+          <div> <%= (item.drink.wholesale_price - (item.discount == nil ? 0 : item.discount)) * (item.quantity == nil ? 0 : item.quantity) %> </div>
         <% end %>
       <% end %>
     </li>
@@ -47,9 +54,10 @@
     
   </div>
   <div class="grid grid-cols-5">
-    <div class="font-bold text-xl col-span-2 ">TOTAL : </div><div></div><div></div><div class="font-bold text-xl"> <%= command_total(command) %></div>
-    <div class="font-bold text-xl col-span-2 "> Amount paid :</div><div></div><div></div><div class="font-bold text-xl"> <%= command.amount_paid %></div>
-    <div class="font-bold text-xl col-span-2 "> Amount Owed :</div><div></div><div></div><div class="font-bold text-xl"> <%= command_total(command) - command.amount_paid %></div>
+    <div class="font-bold text-xl col-span-2 ">TOTAL : </div><div></div><div></div><div class="font-bold text-xl"> <%= Command.command_total(command) %></div>
+    
+      <div class="font-bold text-xl col-span-2 "> Amount paid :</div><div><turbo-frame id="amount_paid"> </div><div></div><div class="font-bold text-xl"></turbo-frame id="amount"> <%= link_to command.amount_paid == nil ? 0 : command.amount_paid , static_amnt_path(id: command.id) %></turbo-frame></div> 
+    <div class="font-bold text-xl col-span-2 "> Amount Owed :</div><div></div><div></div><div class="font-bold text-xl"> <%= Command.command_total(command) - (command.amount_paid == nil ? 0 : command.amount_paid) %></div>
   </div>
   <% if action_name != "show" %>
     <%= link_to "Show this command", command, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>

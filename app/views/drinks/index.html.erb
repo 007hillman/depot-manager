@@ -27,7 +27,7 @@
     </p>
   
     <p class="my-3">
-      <strong class="block font-medium mb-1">Retail price:</strong>
+      <strong class="block font-medium mb-1">Number per pack:</strong>
     </p>
   
     <p class="my-3">
@@ -42,8 +42,8 @@
           <%= link_to drink do %>
             <div class="grid grid-cols-4">
               <div><%= drink.name %></div>
-              <div><%= drink.supplyer%></div>
-              <div><%= drink.retail_price%></div>
+              <div><%= Supplier.find(drink.supplyer).name%></div>
+              <div><%= drink.number_per_package%></div>
               <div><%= drink.wholesale_price %></div>
 
             </div>

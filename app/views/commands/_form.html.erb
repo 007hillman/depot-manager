@@ -12,9 +12,10 @@
       </div>
     <% end %>
 
-    <div class="my-5">
+    <div class="my-5" data-controller="debts">
       <%= form.label :client_name , class: "inline-block text-gray-900 font-bold text-xl"%>
-      <%= form.text_field :client_name, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
+      <%= form.text_field :client_name ,autocomplete: "off", class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" , data: {action: "keyup->debts#search_names"}, id: "name_field" %>
+      <ul id="result"> </ul>
     </div>
     <div class="flex gap-4 w-full mb-10 ">
       <div class="w-full">
@@ -31,20 +32,20 @@
       </div>
     </div>
     <div class="mb-10">
-    <h1 class="bg-gray-900 text-yellow-300 text-center uppercase mb-5 font-bold"> Items Selected</h1>
-    <template data-command-target="itemRow">
-    <%= form.fields_for :items, Item.new, child_index: 'TEMPLATE_RECORD' do |item| %>
-      <%= render "item_fields", form: item %>
+      <h1 class="bg-gray-900 text-yellow-300 text-center uppercase mb-5 font-bold"> Items Selected</h1>
+      <template data-command-target="itemRow">
+      <%= form.fields_for :items, Item.new, child_index: 'TEMPLATE_RECORD' do |item| %>
+        <%= render "item_fields", form: item %>
+      <% end %>
+      </template>
+      <%= form.fields_for :items do |item| %>
+        <%= render "item_fields", form: item %>
     <% end %>
-    </template>
-    <%= form.fields_for :items do |item| %>
-      <%= render "item_fields", form: item %>
-  <% end %>
-      <div data-command-target="items">
+        <div data-command-target="items">
 
-      </div>
+        </div>
 
-      <%= link_to "Add Item +", "#", class: "px-8 py-2 my-5 text-blue-500 block mt-5 bg-gray-900 text-center hover:text-gray-300 hover:bg-blue-800 text-xl font-bold", data: {action: "click->command#addItem"} %>
+        <%= link_to "Add Item +", "#", class: "px-8 py-2 my-5 text-blue-500 block mt-5 bg-gray-900 text-center hover:text-gray-300 hover:bg-blue-800 text-xl font-bold", data: {action: "click->command#addItem"} %>
     </div>
       <div class="w-full mt-10 mb-10">
         <%= form.label :remark , class: "inline-block  text-gray-900 font-bold text-xl"%>
@@ -54,6 +55,7 @@
         <%= form.label :government, class: "block text-gray-900 font-bold text-xl"%>
         <%= form.check_box :government, class: " shadow rounded-sm border border-gray-400 px-2 py-2 " %>
       </div>
+
       <div class="grid grid-cols-2 gap-4">
         <div class="my-5">
           <%= form.label :brasseries_crates_given , class: "inline-block text-yellow-500 bg-gray-900"%>

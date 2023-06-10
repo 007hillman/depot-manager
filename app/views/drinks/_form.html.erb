@@ -19,7 +19,7 @@
 
   <div class="my-5">
     <%= form.label :supplyer , class: "font-bold" %>
-<%= form.select :supplyer, options_for_select([["Supermont","Supermont"],["Brasseries du Cameroun", "Brasseries du Cameroun"],["Guinness Cameroun SA","Guinness Cameroun SA"],["Foreign","Foreign"]],selected: form.object.supplyer),{},{class: "block shadow rounded-md border border-gray-300 outline-none px-3 py-2 mt-2 w-full"} %>
+<%= form.select :supplyer, options_for_select(Supplier.all.map {|supplier| [supplier.name, supplier.id]}, selected: form.object.supplyer),{},{class: "block shadow rounded-md border border-gray-300 outline-none px-3 py-2 mt-2 w-full"} %>
   </div>
 
   <div class="my-5">

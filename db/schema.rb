@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_05_104301) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_05_150619) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -57,6 +57,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_05_104301) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "auxillary_purchases", force: :cascade do |t|
+    t.string "purpose"
+    t.decimal "amount_spent"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "clients", force: :cascade do |t|
     t.string "name"
     t.string "telephone"
@@ -75,6 +82,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_05_104301) do
     t.decimal "amount_paid", default: "0.0"
     t.boolean "paid"
     t.boolean "government"
+    t.boolean "delivered"
   end
 
   create_table "crates", force: :cascade do |t|
@@ -114,14 +122,22 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_05_104301) do
     t.decimal "government_price", default: "0.0"
   end
 
-  create_table "inventories", force: :cascade do |t|
-    t.bigint "drink_id", null: false
+  create_table "goods", force: :cascade do |t|
+    t.bigint "purchase_id", null: false
     t.decimal "quantity"
+    t.bigint "drink_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["drink_id"], name: "index_goods_on_drink_id"
+    t.index ["purchase_id"], name: "index_goods_on_purchase_id"
+  end
+
+  create_table "inventories", force: :cascade do |t|
     t.string "action"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "com"
-    t.index ["drink_id"], name: "index_inventories_on_drink_id"
+    t.bigint "foreign_id"
+    t.decimal "quantity"
   end
 
   create_table "items", force: :cascade do |t|
@@ -131,6 +147,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_05_104301) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "bottles"
+    t.decimal "discount", default: "0.0"
     t.index ["command_id"], name: "index_items_on_command_id"
     t.index ["drink_id"], name: "index_items_on_drink_id"
   end
@@ -143,6 +160,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_05_104301) do
     t.bigint "command_id", null: false
     t.index ["client_id"], name: "index_payments_on_client_id"
     t.index ["command_id"], name: "index_payments_on_command_id"
+  end
+
+  create_table "purchases", force: :cascade do |t|
+    t.bigint "supplier_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["supplier_id"], name: "index_purchases_on_supplier_id"
   end
 
   create_table "reminders", force: :cascade do |t|
@@ -171,11 +195,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_05_104301) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "crates", "clients"
-  add_foreign_key "inventories", "drinks"
+  add_foreign_key "goods", "drinks"
+  add_foreign_key "goods", "purchases"
   add_foreign_key "items", "commands"
   add_foreign_key "items", "drinks"
   add_foreign_key "payments", "clients"
   add_foreign_key "payments", "commands"
+  add_foreign_key "purchases", "suppliers"
   add_foreign_key "transactions", "clients"
   add_foreign_key "transactions", "payments"
 end

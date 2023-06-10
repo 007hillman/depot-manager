@@ -1,0 +1,15 @@
+<turbo-frame id="amount">
+    <%= form_with model: @command  do |form| %>
+      <div class="w-full">
+        <%= form.label :amount_paid, class: "inline-block text-gray-900 font-bold text-xl"%>
+        <%= form.text_field :amount_paid, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
+      </div>
+      <div class="flex flex-col gap-3 ">
+        <%= form.label :paid, class: "inline-block text-gray-900 font-bold text-xl"%>
+        <%= form.check_box :paid, class: " shadow rounded-sm border border-gray-400 px-2 py-2 " %>
+      </div>
+            <div class="inline ">
+                <%= form.submit "Validate",class: "rounded-md py-2 px-5 bg-blue-600 text-white inline-block font-extralight cursor-pointer" %>
+            </div>
+    <% end %>
+</turbo-frame>

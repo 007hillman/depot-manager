@@ -1,6 +1,6 @@
 <section class="grid grid-cols-8 gap-y-5 mb-5">
   <div class="col-span-4"> <span class="font-semibold">Name of drink : </span><%= drink.name %> </div>
-  <div class="col-span-4"> <span class="font-semibold"> Supplyer : </span><%= drink.supplyer %> </div>
+  <div class="col-span-4"> <span class="font-semibold"> Supplyer : </span><%= Supplier.find(drink.supplyer).name %> </div>
   <div class="col-span-2"> <span class="font-semibold">Volume : </span><%= drink.size.to_s + "Litres " %> </div>
   <div class="col-span-3"> <span class="font-semibold"> Packaging type : </span><%= drink.packaging %> </div>
   <div class="col-span-3"> <span class="font-semibold"> Has alcohol? : </span><%= drink.alcoholic ? "Yes" : "No"%> </div>

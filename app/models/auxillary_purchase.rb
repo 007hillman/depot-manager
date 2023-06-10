@@ -1,0 +1,2 @@
+class AuxillaryPurchase < ApplicationRecord
+end

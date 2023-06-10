@@ -14,8 +14,8 @@
     <button class="bg-gray-100 font-bold px-3 py-1 rounded-l-full" data-action="click->debts#hide_mod2">X</button>
   </div>
   <div class="flex justify-center items-center gap-4 w-full h-full">
-    <%= link_to "Supermont", "#" , class: "bg-yellow-400 uppercase font-regular text-white px-20 py-10 bg-opacity-50 hover:font-bold hover:bg-opacity-90"%>
-    <button class="bg-red-700 uppercase font-regular text-white px-20 py-10 bg-opacity-50 hover:font-bold hover:bg-opacity-90">Brasseries</button>
+    <%= link_to "From Supplyer", purchases_path , class: "bg-yellow-400 uppercase font-regular text-white px-20 py-10 bg-opacity-50 hover:font-bold hover:bg-opacity-90"%>
+    <%= link_to "Other purchases", new_auxillary_purchase_path , class: "bg-red-700 uppercase font-regular text-white px-20 py-10 bg-opacity-50 hover:font-bold hover:bg-opacity-90"%>
   </div>
 
 </section>
@@ -67,6 +67,14 @@
           </div>
           <div class="flex items-center pl-4">
             Procurement
+          </div>
+        </a>
+        <a class="border-4 border-yellow-400 inline-block w-full md:w-1/4 rounded-r-full rounded-l-full flex parent hover:bg-yellow-400 cursor-pointer hover:font-bold" href="/static/accounting" >
+          <div class="flex items-center justify-center inline-block border-4 border-yellow-400 rounded-full w-10 h-10 ">
+            <ion-icon name="wallet-outline"></ion-icon>
+          </div>
+          <div class="flex items-center pl-4">
+            Accounting
           </div>
         </a>
   </section>

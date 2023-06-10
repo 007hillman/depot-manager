@@ -3,16 +3,20 @@
     <strong class="block font-medium mb-1">Client:</strong>
     <%= crate.client.name %>
   </p>
-
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Brasseries crates:</strong>
-    <%= crate.brasseries_crates %>
-  </p>
+  <div class="flex justify-between">
     <p class="my-5">
-    <strong class="block font-medium mb-1">Guinness crates:</strong>
-    <%= crate.guinness_crates %>
-  </p>
-
+      <strong class="block font-medium mb-1">Brasseries crates:</strong>
+      <%= crate.brasseries_crates %>
+    </p>
+    <p class="my-5">
+      <strong class="block font-medium mb-1">Guinness crates:</strong>
+      <%= crate.guinness_crates %>
+    </p>
+    <p class="my-5">
+      <strong class="block font-medium mb-1">Action :</strong>
+      <%= crate.action %>
+    </p>
+  </div>
   <% if action_name != "show" %>
     <%= link_to "Show this crate", crate, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
     <%= link_to 'Edit this crate', edit_crate_path(crate), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>

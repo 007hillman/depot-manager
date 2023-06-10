@@ -1,7 +1,22 @@
 class CommandsController < ApplicationController
   before_action :set_command, only: %i[ show edit update destroy ]
-
+  def command_total(c)
+    sum = 0
+    c.items.each do |item|
+        if item.bottles
+            sum += (item.quantity) * item.drink.retail_price
+        else
+            sum += item.quantity * item.drink.wholesale_price
+        end
+    end
+    return sum.round(1)
+end
   # GET /commands or /commands.json
+  def update_inventory(c)
+    if c.delivered
+      
+    end
+  end
   def index
     if params[:query]
       @commands = Command.global_search(params[:query])
@@ -58,19 +73,18 @@ class CommandsController < ApplicationController
 
   # PATCH/PUT /commands/1 or /commands/1.json
   def update
-
     respond_to do |format|
-
       if @command.update(command_params)
         if command_params[:paid] == 1.to_s
           c = Command.find(@command.id)
-          c.amount_paid = CommandsController.command_total(@command)
+          c.amount_paid = command_total(@command)
           c.save
         else
           c = Command.find(@command.id)
           c.amount_paid = command_params[:amount_paid]
           c.save  
         end
+        update_inventory(@command)
         format.html { redirect_to command_url(@command), notice: "Command was successfully updated." }
         format.json { render :show, status: :ok, location: @command }
       else
@@ -99,17 +113,7 @@ class CommandsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def command_params
-      params.require(:command).permit(:client_name,:amount_paid,:paid, :payment_method, :brasseries_crates_given, :guinness_crates_given,:government,:remark ,items_attributes: [:id,:quantity,:drink_id,:bottles,:_destroy])
+      params.require(:command).permit(:client_name,:amount_paid,:paid, :payment_method, :brasseries_crates_given, :guinness_crates_given,:government,:remark, :delivered ,items_attributes: [:id,:quantity,:drink_id,:discount,:bottles,:_destroy])
     end
-    def self.command_total(c)
-      sum = 0
-      c.items.each do |item|
-          if item.bottles
-              sum += (item.quantity/item.drink.number_per_package) * item.drink.wholesale_price
-          else
-              sum += item.quantity * item.drink.wholesale_price
-          end
-      end
-      return sum.round(1)
-  end
+
 end

@@ -39,6 +39,7 @@ export default class extends Controller {
         let item = document.createElement('li')
         item.innerText =client.name
         item.setAttribute("data-action","click->debts#select")
+        item.setAttribute("class","cursor-pointer hover:bg-gray-800 hover:text-white hover:font-bold")
         list.appendChild(item)
       });
     })

@@ -1,0 +1,17 @@
+<div id="<%= dom_id auxillary_purchase %>">
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Purpose:</strong>
+    <%= auxillary_purchase.purpose %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Amount spent:</strong>
+    <%= auxillary_purchase.amount_spent %>
+  </p>
+
+  <% if action_name != "show" %>
+    <%= link_to "Show this auxillary purchase", auxillary_purchase, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= link_to 'Edit this auxillary purchase', edit_auxillary_purchase_path(auxillary_purchase), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+    <hr class="mt-6">
+  <% end %>
+</div>
