@@ -1,0 +1,18 @@
+<div>
+  <h1 class="font-bold text-4xl">Select a given date to show all goods consumed since that date </h1>
+      <form action="/functions/goods_consumption" method="get">
+      <input type="date" name="search_date" id="search_date" value= "<%= @date%>">
+      <button type="submit" class="rounded-lg py-2 px-5 bg-purple-400 text-white inline-block font-medium cursor-pointer"> Search</button>
+    </form>
+    <ul>
+      <% if @goods_hash == {} %>
+        <h1> No goods found </h1>
+      <% else%>
+        <ul>
+          <% @goods_hash.each do |key, value| %>
+            <li>  <%= key %> : <%= value %> </li>
+          <% end %>
+        </ul>
+      <% end %>
+    </ul>
+</div>

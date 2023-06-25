@@ -1,16 +1,6 @@
 class CommandsController < ApplicationController
   before_action :set_command, only: %i[ show edit update destroy ]
-  def command_total(c)
-    sum = 0
-    c.items.each do |item|
-        if item.bottles
-            sum += (item.quantity) * item.drink.retail_price
-        else
-            sum += item.quantity * item.drink.wholesale_price
-        end
-    end
-    return sum.round(1)
-end
+
   # GET /commands or /commands.json
   def update_inventory(c)
     if c.delivered
@@ -57,7 +47,7 @@ end
   def create
     @command = Command.new(command_params)
     if command_params[:paid]  == 1.to_s
-      @command.amount_paid = command_total(@command)
+      @command.amount_paid = Command.command_total(@command) 
     end
     
     respond_to do |format|
@@ -77,7 +67,7 @@ end
       if @command.update(command_params)
         if command_params[:paid] == 1.to_s
           c = Command.find(@command.id)
-          c.amount_paid = command_total(@command)
+          c.amount_paid = Command.command_total(@command) 
           c.save
         else
           c = Command.find(@command.id)
@@ -113,7 +103,7 @@ end
 
     # Only allow a list of trusted parameters through.
     def command_params
-      params.require(:command).permit(:client_name,:amount_paid,:paid, :payment_method, :brasseries_crates_given, :guinness_crates_given,:government,:remark, :delivered ,items_attributes: [:id,:quantity,:drink_id,:discount,:bottles,:_destroy])
+      params.require(:command).permit(:transportation,:client_name,:created_at,:amount_paid,:paid, :payment_method, :brasseries_crates_given, :guinness_crates_given,:government,:remark, :delivered ,items_attributes: [:id,:quantity,:drink_id,:discount,:bottles,:_destroy])
     end
 
 end

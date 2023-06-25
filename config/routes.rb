@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'functions/goods_consumption'
   resources :auxillary_purchases
   resources :purchases
   resources :crates
@@ -18,6 +19,8 @@ Rails.application.routes.draw do
   get 'static/transaction_summary'
   get 'static/crates' , to: 'static#crates'
   get 'static/amnt', to: 'static#amount'
+  get '/generate_list', to: 'static#generate_list'
+  get '/functions/goods_consumption', to: 'function#goods_consumption'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")

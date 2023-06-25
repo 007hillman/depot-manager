@@ -21,9 +21,9 @@
     <%= link_to command_path(command) do %>
     <li class="hover:text-blue-300 hover:bg-gray-900 grid grid-cols-5 gap-10 py-2">
       <div class="col-span-2"> <%= command.created_at.strftime("%A, %d %B %Y") %></div>
-      <div> <%= command_total(command) %> </div>
+      <div> <%= Command.command_total(command) %> </div>
       <div> <%= command.amount_paid == nil ? 0.0 : command.amount_paid%> </div>
-      <div> <%= command_total(command) - (command.amount_paid == nil ? 0.0 : command.amount_paid) %> </div>
+      <div> <%= Command.command_total(command) - (command.amount_paid == nil ? 0.0 : command.amount_paid) %> </div>
     </li>
     <% end %>
   <% end %>

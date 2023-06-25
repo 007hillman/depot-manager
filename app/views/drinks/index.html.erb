@@ -17,6 +17,7 @@
     </div>
 <% end %>
 <hr>
+<%= link_to "generate orice list", generate_list_path(format: :pdf) , class: "text-red-400"%>
   <div class="grid md:grid-cols-4 bg-gray-800 text-white font-semibold uppercase">
     <p class="my-3">
       <strong class="block font-medium mb-1">Name:</strong>
@@ -27,7 +28,7 @@
     </p>
   
     <p class="my-3">
-      <strong class="block font-medium mb-1">Number per pack:</strong>
+      <strong class="block font-medium mb-1">Buying cost:</strong>
     </p>
   
     <p class="my-3">
@@ -43,7 +44,7 @@
             <div class="grid grid-cols-4">
               <div><%= drink.name %></div>
               <div><%= Supplier.find(drink.supplyer).name%></div>
-              <div><%= drink.number_per_package%></div>
+              <div><%= drink.buying_cost %></div>
               <div><%= drink.wholesale_price %></div>
 
             </div>

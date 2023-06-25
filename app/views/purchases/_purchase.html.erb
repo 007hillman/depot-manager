@@ -1,12 +1,22 @@
-<div id="<%= dom_id purchase %>">
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Supplier:</strong>
-    <%= purchase.supplier_id %>
+<div id="<%= dom_id purchase %>" class="flex justify-between w-full  my-1">
+<%= link_to purchase, class: "w-full grid grid-cols-2 items-center hover:text-white hover:bg-blue-800 hover:font-bold px-4" do %>
+  <p class="my-5 ">
+    <%= Supplier.find(purchase.supplier_id).name %>
+  </p>
+  <p>
+    <%= purchase.created_at.strftime("%d-%m-%Y")%>
   </p>
 
   <% if action_name != "show" %>
-    <%= link_to "Show this purchase", purchase, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <%= link_to 'Edit this purchase', edit_purchase_path(purchase), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+    <div class="flex items-center">
+      <%= link_to purchase, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" do %>
+        <ion-icon name="eye"></ion-icon>
+      <% end %>
+      <%= link_to  edit_purchase_path(purchase), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" do %>
+        <ion-icon name="pencil"></ion-icon>
+      <% end %>
+    </div>
     <hr class="mt-6">
   <% end %>
+<% end %>
 </div>

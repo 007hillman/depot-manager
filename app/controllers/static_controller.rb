@@ -77,16 +77,16 @@ end
     pdf.draw_text 'Items: ', style: :bold, size: 14, at: [175, 460]
     pdf.draw_text 'Code    |Qty  |UP    |TP', at: [175, 445]
     transport = 0
-
+    
     pdf.bounding_box([175, 435], width: 400) do
       @command.items.each do |item|
         if item.bottles
           total_price = (item.quantity ) * (item.drink.retail_price * item.discount)
           sum_total += total_price
+
         else
           total_price = item.quantity * (item.drink.wholesale_price - item.discount)
           sum_total += total_price
-          transport += item.quantity * 20
         end
 
         if(Supplier.find(item.drink.supplyer).name == "Brasseries du Cameroun SA" and item.drink.packaging == "crate")
@@ -95,17 +95,29 @@ end
         if(Supplier.find(item.drink.supplyer).name == "Guinness Cameroun SA" and item.drink.packaging == "crate")
           g_crates_needed += item.quantity
         end
+          if item.bottles 
+            pdf.text item.drink.abbreviation + "| " + item.quantity.to_s + "| "+ (item.drink.retail_price - item.discount).to_s + "| " + ((item.drink.retail_price - item.discount)*item.quantity).to_s
+          else
+            pdf.text item.drink.abbreviation + "| " + item.quantity.to_s + "| "+ (item.drink.wholesale_price - item.discount).to_s + "| " + total_price.to_s
+          end
 
-        pdf.text item.drink.abbreviation + "| " + item.quantity.to_s + "| "+ (item.drink.wholesale_price - item.discount).to_s + "| " + total_price.to_s
       end
-      # pdf.text 'transportation :           ' + transport.to_s
+      if @command.transportation?
+        transport = Command.calculate_transport(@command)
+      end
+      total_for_command = (Command.command_total(@command)) 
+      total_owed = Client.total_owed(@command.client_name, @command.created_at)
+      amount_paid = @command.amount_paid == nil ? 0.to_f : @command.amount_paid
+      pdf.text 'transportation :           ' + transport.to_s
       sum_total += 0
-      pdf.text 'TOTAL:                 ' + (Command.command_total(@command)).to_s, style: :bold
-      pdf.text 'Amount paid :           ' + (@command.amount_paid == nil ? 0.0 : @command.amount_paid).to_s
-      pdf.text  'Amount left :          '  + (Command.command_total(@command) - (@command.amount_paid == nil ? 0 : @command.amount_paid)).to_s
-      old_debt = (Client.total_owed(@command.client_name) - Command.command_total(@command) ) > 0 ? (Client.total_owed(@command.client_name) - Command.command_total(@command) ) : 0
+      pdf.text 'TOTAL                  ' + (total_for_command).to_s,  style: :bold
+      pdf.text 'Amount paid :           ' + (amount_paid).to_s
+      pdf.text  'Amount left :          '  + (total_for_command - (amount_paid)).to_s
+      old_debt = total_owed
+
       pdf.text 'Old debt :            ' + old_debt.to_s 
-      pdf.draw_text "Total owed : " + (Client.total_owed(@command.client_name) + 0).to_s , at: [0, pdf.cursor - 10], size: 11, style: :bold
+
+      pdf.draw_text "TOTAL + DEBT : " + (total_owed + total_for_command - amount_paid ).to_s , at: [0, pdf.cursor - 10], size: 11, style: :bold
 
     end
     pdf.bounding_box([175,pdf.cursor - 10], :width => 400) do
@@ -138,9 +150,46 @@ end
       }
   end
 end
-def accounting
-  @profit = Transaction.get_daily_profit
-end
+  def accounting
+    @profit_array = []
+    beginning_of_week = Date.today.at_beginning_of_week
+    today_date = Date.today
+    while beginning_of_week != today_date.advance(days: 1)
+      @profit_array << Transaction.get_daily_profit(date: beginning_of_week)
+      beginning_of_week = beginning_of_week.advance(days: 1)
+    end
+    puts @profit_array.to_s
+    @profit = Transaction.get_daily_profit(date: Date.today)
+    @transport = Transaction.get_daily_transport
+  end
+  def generate_list
+    drinks = Drink.all.order('supplyer desc').order("name asc")
+    pdf = Prawn::Document.new
+    pdf.font "Helvetica"
+    pdf.bounding_box([0,720], :width => 1000) do
+      pdf.image "#{Rails.root}/app/assets/images/logo.png" , :scale => 0.20 
+      pdf.draw_text "BEDOTA ENTERPRISE PRICE LIST", :at => [120, pdf.cursor  + 50], style: :bold , size: 20
+      pdf.draw_text 'Location: Clerks Quarters Buea , Tel: 673-513-775', :at => [120, pdf.cursor  + 35], style: :bold 
+    end
+    pdf.stroke_horizontal_rule
+    pdf.move_down 20
+    pdf.font "Courier", size: 9
+      array = []
+      array << ["Drink Name","Supplier","Quantity","Unit price"]      
+      drinks.each do |drink|
+        array <<  [drink.name, Supplier.find(drink.supplyer).name, "1 " + drink.packaging ,drink.wholesale_price.to_s]
+      end
+      pdf.table(
+        array
+      )
+    respond_to do |format|
+      format.pdf { send_data pdf.render,
+        filename: "price_list.pdf",
+        type: "application/pdf",
+        disposition: :inline # or :attachment to download
+      }
+    end
+  end
 end
 # @command = Command.find(params[:id])
 # @items = @command.items

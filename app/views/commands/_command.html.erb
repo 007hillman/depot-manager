@@ -51,13 +51,23 @@
     
     <% end %>
   </ul>
-    
+    <%
+        transport = command.transportation ? Command.calculate_transport(command) : 0
+      command_total = Command.command_total(command) 
+  
+      amount_paid = command.amount_paid == nil ? 0 : command.amount_paid 
+    %>
   </div>
-  <div class="grid grid-cols-5">
-    <div class="font-bold text-xl col-span-2 ">TOTAL : </div><div></div><div></div><div class="font-bold text-xl"> <%= Command.command_total(command) %></div>
+    <div class="grid grid-cols-5 mb-8">
+    <div class=" col-span-2 pl-4">Transportation : </div><div></div><div></div><div class="pl-8 gap-4"> <%= transport %></div>
+    </div>
+  <div class="grid grid-cols-5 ">
+
+
+    <div class="font-bold text-xl col-span-2 ">TOTAL : </div><div></div><div></div><div class="font-bold text-xl"> <%= command_total %></div>
     
-      <div class="font-bold text-xl col-span-2 "> Amount paid :</div><div><turbo-frame id="amount_paid"> </div><div></div><div class="font-bold text-xl"></turbo-frame id="amount"> <%= link_to command.amount_paid == nil ? 0 : command.amount_paid , static_amnt_path(id: command.id) %></turbo-frame></div> 
-    <div class="font-bold text-xl col-span-2 "> Amount Owed :</div><div></div><div></div><div class="font-bold text-xl"> <%= Command.command_total(command) - (command.amount_paid == nil ? 0 : command.amount_paid) %></div>
+      <div class="font-bold text-xl col-span-2 "> Amount paid :</div><div><turbo-frame id="amount_paid"> </div><div></div><div class="font-bold text-xl"></turbo-frame id="amount"> <%= link_to amount_paid , static_amnt_path(id: command.id) %></turbo-frame></div> 
+    <div class="font-bold text-xl col-span-2 "> Amount Owed :</div><div></div><div></div><div class="font-bold text-xl"> <%= command_total - amount_paid %></div>
   </div>
   <% if action_name != "show" %>
     <%= link_to "Show this command", command, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
