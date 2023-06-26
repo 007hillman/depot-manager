@@ -29,8 +29,6 @@ gem 'pg_search'
 gem 'receipts'
 #use simple form in our app
 gem 'simple_form'
-#using bullet gem to optimize queries
-gem 'bullet', '~> 7.0', '>= 7.0.7'
 #using cocoon in our app
 gem "cocoon"
 # Use Tailwind CSS [https://github.com/rails/tailwindcss-rails]
