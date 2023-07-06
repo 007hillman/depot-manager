@@ -7,6 +7,10 @@
     <strong class=" font-bold mb-1">Command date:</strong>
     <%= command.created_at.strftime("%A, %d %B %Y") %>
   </p>
+  <div class="grid grid-cols-2">
+    <div>Brasseries crates needed : <%= Crate.brassseries_crates_needed(command) %> </div>
+    <div>Guinness crates needed :  <%= Crate.guinness_crates_needed(command) %></div>
+  </div>
   <turbo-frame id="crates">
     <div class="grid grid-cols-5">
       <div class="col-span-2"> Brasseries crates given : <%= command.brasseries_crates_given %> </div>
