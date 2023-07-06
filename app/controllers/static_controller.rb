@@ -1,4 +1,5 @@
 class StaticController < ApplicationController
+  before_action :authenticate_user!, only: [:accounting]
   def home
     @reminders = Reminder.all
     @rem = Reminder.new
@@ -158,9 +159,10 @@ end
       @profit_array << Transaction.get_daily_profit(date: beginning_of_week)
       beginning_of_week = beginning_of_week.advance(days: 1)
     end
-    puts @profit_array.to_s
-    @profit = Transaction.get_daily_profit(date: Date.today)
-    @transport = Transaction.get_daily_transport
+    if current_user.admin
+      @profit = Transaction.get_daily_profit(date: Date.today)
+      @transport = Transaction.get_daily_transport
+    end
   end
   def generate_list
     drinks = Drink.all.order('supplyer desc').order("name asc")

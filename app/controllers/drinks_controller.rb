@@ -48,6 +48,7 @@ class DrinksController < ApplicationController
   def update
     respond_to do |format|
       if @drink.update(drink_params)
+        SupplementaryMethodsController.reinitialize_commands
         format.html { redirect_to drink_url(@drink), notice: "Drink was successfully updated." }
         format.json { render :show, status: :ok, location: @drink }
       else
