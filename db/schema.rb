@@ -14,11 +14,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_20_093014) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "accountings", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -118,8 +113,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_20_093014) do
     t.integer "number_per_package"
     t.string "container_type"
     t.string "abbreviation", default: "ITM"
-    t.decimal "buying_cost", default: "0.0"
-    t.decimal "safe_quantity", default: "0.0"
     t.decimal "government_price", default: "0.0"
   end
 
@@ -153,16 +146,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_20_093014) do
     t.index ["drink_id"], name: "index_items_on_drink_id"
   end
 
-  create_table "payments", force: :cascade do |t|
-    t.bigint "client_id", null: false
-    t.decimal "amount_paid"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "command_id", null: false
-    t.index ["client_id"], name: "index_payments_on_client_id"
-    t.index ["command_id"], name: "index_payments_on_command_id"
-  end
-
   create_table "purchases", force: :cascade do |t|
     t.bigint "supplier_id", null: false
     t.datetime "created_at", null: false
@@ -188,9 +171,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_20_093014) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "client_id", null: false
-    t.bigint "payment_id", null: false
     t.index ["client_id"], name: "index_transactions_on_client_id"
-    t.index ["payment_id"], name: "index_transactions_on_payment_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
@@ -200,9 +181,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_20_093014) do
   add_foreign_key "goods", "purchases"
   add_foreign_key "items", "commands"
   add_foreign_key "items", "drinks"
-  add_foreign_key "payments", "clients"
-  add_foreign_key "payments", "commands"
   add_foreign_key "purchases", "suppliers"
   add_foreign_key "transactions", "clients"
-  add_foreign_key "transactions", "payments"
 end
