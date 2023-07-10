@@ -1,16 +1,34 @@
-<section class=" w-full flex flex-col justify-center  items-center">
+<section class=" w-full flex flex-col justify-center  items-center ">
 <h2 class="text-4xl mb-10">Log in</h2>
-<%= form_with url: session_path(resource) , class: "block w-1/3 flex flex-col justify-center gap-5" , autocomplete: "new-password" do |form|%>
-  <%= form.text_field :email , autocomplete: "new-password",class: " border border-0 border-b-2 border-gray-400 bg-white", placeholder: "enter your email"%>
-  <%= form.password_field :password , class: "border border-0 border-b-2 border-gray-400 bg-white " %>
-  <% if devise_mapping.rememberable? %>
-  <div class="flex  gap-2 items-center">
-    <%= form.check_box  :remember_me  , class: "inline" %>
-    <%= form.label :remember_me , "Remember me"%>
+
+<div class=" w-1/3">
+<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name) ) do |f| %>
+<section class= "block flex flex-col justify-center gap-5 w-full ">
+  <div class="w-full">
+    <%= f.input :email,
+                required: false,
+                input_html: { autocomplete: "email" , class: "block border border-0 border-b-2 border-gray-600 bg-white w-full", placeholder: "enter your email"} ,
+                label_html: {class: "hidden"} %>
+    <%= f.error :email, id: 'user_name_error' %>
   </div>
-  <% end %>
-  <%= form.submit "Sign in " , class: "bg-blue-800 text-white text-center py-2 hover:font-bold hover:bg-blue-400"%>
+  <div>
+    <%= f.input :password,
+                required: false,
+                input_html: { autocomplete: "current-password" ,class: "block border border-0 border-b-2 border-gray-400 bg-white w-full" }, 
+                label_html: {class: "hidden"}
+                %>
+  </div>
+  <div class="w-full">
+    <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+  </div>
+  <div class="form-actions">
+    <%= f.button :submit, "Log in" , class: "bg-blue-800 text-white text-center py-2 hover:font-bold hover:bg-blue-400 w-full"%>
+  </div>
+<section>
 <% end %>
+
+</div>
 
 <%= render "devise/shared/links" %>
 </section>
+

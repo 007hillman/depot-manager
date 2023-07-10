@@ -152,17 +152,10 @@ end
   end
 end
   def accounting
-    @profit_array = []
-    beginning_of_week = Date.today.at_beginning_of_week
-    today_date = Date.today
-    while beginning_of_week != today_date.advance(days: 1)
-      @profit_array << Transaction.get_daily_profit(date: beginning_of_week)
-      beginning_of_week = beginning_of_week.advance(days: 1)
-    end
-    if current_user.admin
+    @profit_array = {}
+      @profit_array = Transaction.get_weekly_profit
       @profit = Transaction.get_daily_profit(date: Date.today)
       @transport = Transaction.get_daily_transport
-    end
   end
   def generate_list
     drinks = Drink.all.order('supplyer desc').order("name asc")
