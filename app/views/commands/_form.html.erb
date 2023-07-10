@@ -31,7 +31,7 @@
       </div>
       <div class="w-full">
 
-        <%= form.select :payment_method,options_for_select([["Cash payment","Cash payment"],["Mobile Money","Mobile money"]], selected: form.object.payment_method),{} ,{class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full"} %>
+        <%= form.select :payment_method,options_for_select([["Cash payment","Cash payment"],["Mobile Money","Mobile money"]], selected: form.object.payment_method),{} ,{class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full border border-0 border-b-2 border-gray-400 bg-white"} %>
       </div>
 
 
@@ -65,15 +65,15 @@
 
       <div class="grid grid-cols-2 gap-4">
         <div class="my-5">
-          <%= form.label :brasseries_crates_given , class: "inline-block text-yellow-500 bg-gray-900"%>
-          <%= form.text_field :brasseries_crates_given, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full,  border border-0 border-b-2 border-gray-400 bg-white", placeholder: "" %>
+          <%= form.label :brasseries_crates_given , class: "inline-block text-gray-900 font-bold text-xl"%>
+          <%= form.text_field :brasseries_crates_given, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full  border border-0 border-b-2 border-gray-400 bg", placeholder: "" %>
         </div>
         <div class="my-5">
-          <%= form.label :guinness_crates_given , class: "inline-block text-yellow-500 bg-gray-900"%>
-          <%= form.text_field :guinness_crates_given, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full,  border border-0 border-b-2 border-gray-400 bg-white", placeholder: "" %>
+          <%= form.label :guinness_crates_given , class: "inline-block text-gray-900 font-bold text-xl"%>
+          <%= form.text_field :guinness_crates_given, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full  border border-0 border-b-2 border-gray-400 bg-white", placeholder: "" %>
         </div>
       </div>
     <div class="inline mb-20">
-      <%= form.submit "Validate",class: "rounded-md py-2 px-5 bg-blue-600 text-white inline-block font-extralight cursor-pointer" %>
+      <%= form.submit "Validate",class: "rounded-md py-2 px-5 bg-blue-600 hover:bg-blue-400 text-white hover:font-bold inline-block font-extralight cursor-pointer" %>
     </div>
   <% end %>

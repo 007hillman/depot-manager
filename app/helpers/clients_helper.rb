@@ -1,4 +1,6 @@
 module ClientsHelper
+    include Pagy::Frontend
+
     def total_owed(client_name)
         sum = 0
         @commands = Command.global_search(client_name)
