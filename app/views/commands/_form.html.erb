@@ -13,31 +13,32 @@
     <% end %>
 
     <div class="my-5" data-controller="debts">
-      <%= form.label :client_name , class: "inline-block text-gray-900 font-bold text-xl"%>
-      <%= form.text_field :client_name ,autocomplete: "off", class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" , data: {action: "keyup->debts#search_names"}, id: "name_field" %>
+
+      <%= form.text_field :client_name ,autocomplete: "off", class: "block  outline-none px-3 py-2 mt-2 w-full ,  border border-0 border-b-2 border-gray-400 bg-white rounded-md", placeholder: "client name " , data: {action: "keyup->debts#search_names"}, id: "name_field" %>
       <ul id="result"> </ul>
     </div>
     <div class="flex gap-4 w-full mb-10 ">
       <div class="w-full">
-        <%= form.label :amount_paid, class: "inline-block text-gray-900 font-bold text-xl"%>
-        <%= form.text_field :amount_paid, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
+        <%= form.text_field :amount_paid, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full,  border border-0 border-b-2 border-gray-400 bg-white", placeholder: "amount paid"  %>
       </div>
-      <div class="flex flex-col gap-3 ">
+      <div class="flex items-center gap-3 ">
         <%= form.label :paid, class: "inline-block text-gray-900 font-bold text-xl"%>
         <%= form.check_box :paid, class: " shadow rounded-sm border border-gray-400 px-2 py-2 " %>
       </div>
-      <div class="flex flex-col gap-3 ">
+      <div class="flex  gap-3 items-center ">
         <%= form.label "Transportation? ", class: "inline-block text-gray-900 font-bold text-xl"%>
         <%= form.check_box :transportation, class: " shadow rounded-sm border border-gray-400 px-2 py-2 " %>
       </div>
       <div class="w-full">
-        <%= form.label :payment_method , class: "inline-block text-gray-900 font-bold text-xl"%>
-        <%= form.select :payment_method,options_for_select([["Cash payment","Cash payment"],["Mobile Money","Mobile money"]], selected: form.object.payment_method),{} ,{class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full"} %>
+
+        <%= form.select :payment_method,options_for_select([["Cash payment","Cash payment"],["Mobile Money","Mobile money"]], selected: form.object.payment_method),{} ,{class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full border border-0 border-b-2 border-gray-400 bg-white"} %>
       </div>
+
+
     </div>
+      <hr>
 
     <div class="mb-10">
-      <h1 class="bg-gray-900 text-yellow-300 text-center uppercase mb-5 font-bold"> Items Selected</h1>
       <template data-command-target="itemRow">
       <%= form.fields_for :items, Item.new, child_index: 'TEMPLATE_RECORD' do |item| %>
         <%= render "item_fields", form: item %>
@@ -50,28 +51,29 @@
 
         </div>
 
-        <%= link_to "Add Item +", "#", class: "px-8 py-2 my-5 text-blue-500 block mt-5 bg-gray-900 text-center hover:text-gray-300 hover:bg-blue-800 text-xl font-bold", data: {action: "click->command#addItem"} %>
+        <%= link_to "Add Item +", "#", class: "px-8 py-2 my-5 text-gray-100 block mt-5 bg-blue-800 text-center hover:bg-blue-400 text-xl font-bold", data: {action: "click->command#addItem"} %>
     </div>
       <div class="w-full mt-10 mb-10">
-        <%= form.label :remark , class: "inline-block  text-gray-900 font-bold text-xl"%>
-        <%= form.rich_text_area :remark,class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full", placeholder: "Enter any information here which is worth noting about this command" %>
+        
+        <%= form.rich_text_area :remark,class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full,  border border-0 border-b-2 border-gray-400 bg-white", placeholder: "remark" %>
       </div>
-      <div class="flex flex-col gap-3 ">
-        <%= form.label :government, class: "block text-gray-900 font-bold text-xl"%>
+      <div class="flex  gap-3 items-center ">
         <%= form.check_box :government, class: " shadow rounded-sm border border-gray-400 px-2 py-2 " %>
+
+        <%= form.label :government, class: "block text-gray-900 font-bold text-xl"%>
       </div>
 
       <div class="grid grid-cols-2 gap-4">
         <div class="my-5">
-          <%= form.label :brasseries_crates_given , class: "inline-block text-yellow-500 bg-gray-900"%>
-          <%= form.text_field :brasseries_crates_given, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
+          <%= form.label :brasseries_crates_given , class: "inline-block text-gray-900 font-bold text-xl"%>
+          <%= form.text_field :brasseries_crates_given, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full  border border-0 border-b-2 border-gray-400 bg", placeholder: "" %>
         </div>
         <div class="my-5">
-          <%= form.label :guinness_crates_given , class: "inline-block text-yellow-500 bg-gray-900"%>
-          <%= form.text_field :guinness_crates_given, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
+          <%= form.label :guinness_crates_given , class: "inline-block text-gray-900 font-bold text-xl"%>
+          <%= form.text_field :guinness_crates_given, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full  border border-0 border-b-2 border-gray-400 bg-white", placeholder: "" %>
         </div>
       </div>
     <div class="inline mb-20">
-      <%= form.submit "Validate",class: "rounded-md py-2 px-5 bg-blue-600 text-white inline-block font-extralight cursor-pointer" %>
+      <%= form.submit "Validate",class: "rounded-md py-2 px-5 bg-blue-600 hover:bg-blue-400 text-white hover:font-bold inline-block font-extralight cursor-pointer" %>
     </div>
   <% end %>

@@ -6,7 +6,7 @@ class ClientsController < ApplicationController
     if params[:query]
       @clients = Client.global_search(params[:query])
     else
-      @clients = Client.all.order("name")
+      @pagy, @clients = pagy(Client.all.order("name"))
     end
     respond_to do |format|
       format.html

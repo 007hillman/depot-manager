@@ -1,4 +1,18 @@
 <div class="flex flex-col">
-    <h1> Profit for today is : <%= @profit%> </h1>
-    <div  class = "block mt-4"> Transport for today : <%= @transport%></div>
+    <div class="grid grid-cols-2 mb-2 gap-1">
+        <div class="border border-violet-400 px-4 py-1">Profit for today is : <%= @profit%> </div>
+        <div class="border  border-violet-400 px-4 py-1">Transport for today : <%= @transport%></div>
+    </div>
+    <div class="grid grid-cols-7 gap-2">
+        <% @profit_array.each do |index, value| %>
+            <% if index == Date.today %>
+                <div class="border border-green-400 rounded-md">
+            <% else %>
+                <div class="border border-gray-400 rounded-md">
+            <% end %>
+                <div class="px-4 pt-1"> <%= index.strftime("%a") %> </div>
+                <div class="px-4 pb-1"> <%= value %> </div>
+            </div>
+        <% end %> 
+    </div>
 </div>
