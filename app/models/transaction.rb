@@ -6,17 +6,9 @@ class Transaction < ApplicationRecord
         else
             commands = Command.all.select {|x| x.created_at.strftime("%Y-%m-%d") == Date.today.strftime("%Y-%m-%d") }
         end
-        profit = 0
         commands.each do |command|
-            if command.amount_paid != 0.0
-                command.items.each do |item|
-                    if item.bottles
-                        profit += ((item.drink.retail_price - item.discount )- (item.drink.buying_cost/item.drink.number_per_package))* (item.quantity == nil ? 0 : item.quantity)
-                    else
-                        profit += ((item.drink.wholesale_price - item.discount) - item.drink.buying_cost)*(item.quantity == nil ? 0 : item.quantity)
-                    end
-                    # puts item.drink.name + " : " + profit.round(1)
-                end
+            if command.amount_paid > 0.0
+                get_profit_for_command(command)
             end
         end
         return profit.round(1)
@@ -48,5 +40,16 @@ class Transaction < ApplicationRecord
         end
         profit_hash[current_date] = get_daily_profit(date: current_date)
         return profit_hash
+    end
+    def self.get_profit_for_command(command)
+        profit = 0
+            command.items.each do |item|
+                if item.bottles
+                    profit += ((item.drink.retail_price - item.discount )- (item.drink.buying_cost/item.drink.number_per_package))* (item.quantity == nil ? 0 : item.quantity)
+                else
+                    profit += ((item.drink.wholesale_price - item.discount) - item.drink.buying_cost)*(item.quantity == nil ? 0 : item.quantity)
+                end
+            end
+        return profit.round(1)
     end
 end
