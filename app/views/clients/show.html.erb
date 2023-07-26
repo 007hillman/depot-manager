@@ -13,8 +13,8 @@
     <%= render @client %>
 <hr>
 <h1 class="uppercase font-semibold my-5">Transaction History</h1>
-  <div class="grid grid-cols-5 uppercase font-black text-white bg-gray-900">
-    <div class="col-span-2 pl-4"> Date</div> <div> Goods amount</div> <div>Amount paid</div> <div> Amount Owed</div>
+  <div class="grid grid-cols-6 uppercase font-black text-white bg-gray-900">
+    <div class="col-span-2 pl-4"> Date</div> <div> Goods amount</div> <div>Amount paid</div> <div> Amount Owed</div> <div class="text-center">PR</div>
   </div>
 <ul class="mb-10">
   <%@commands.order("created_at asc").each do |command| %>
