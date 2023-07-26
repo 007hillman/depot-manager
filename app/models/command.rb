@@ -20,7 +20,7 @@ def self.calculate_transport(command)
       command.transportation ? transport += item.quantity * (item.drink.wholesale_price * 0.006) : transport += 0.0
     end
   end
-  transport = transport > 300 ? 300 : transport;
+  transport = transport > 100 ? 200 : transport;
   transport = transport < 100 ? 100 : transport;
   return transport
 end
