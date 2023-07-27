@@ -1,6 +1,6 @@
 class Transaction < ApplicationRecord
     def self.get_daily_profit(**args)
-        
+        profit = 0
         if args[:date]
             commands = Command.all.select {|x| x.created_at.strftime("%Y-%m-%d") == args[:date].strftime("%Y-%m-%d") }
         else
@@ -8,10 +8,10 @@ class Transaction < ApplicationRecord
         end
         commands.each do |command|
             if command.amount_paid > 0.0
-                get_profit_for_command(command)
+               profit += get_profit_for_command(command)
             end
         end
-        return profit.round(1)
+        return profit
     end
     def self.get_daily_transport
         transport_for_today = 0

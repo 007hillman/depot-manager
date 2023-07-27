@@ -111,17 +111,17 @@ end
       amount_paid = @command.amount_paid == nil ? 0.to_f : @command.amount_paid
       pdf.text 'transportation :           ' + transport.to_s
       sum_total += 0
-      pdf.text 'TOTAL                  ' + (total_for_command).to_s,  style: :bold
+      pdf.text 'SUB TOTAL                  ' + (total_for_command).to_s,  style: :bold
       pdf.text 'Amount paid :           ' + (amount_paid).to_s
       pdf.text  'Amount left :          '  + (total_for_command - (amount_paid)).to_s
       old_debt = total_owed
 
       pdf.text 'Old debt :            ' + old_debt.to_s 
 
-      pdf.draw_text "TOTAL + DEBT : " + (total_owed + total_for_command - amount_paid ).to_s , at: [0, pdf.cursor - 10], size: 11, style: :bold
-
+      pdf.draw_text "GRAND TOTAL : " + (total_owed + total_for_command - amount_paid ).to_s , at: [0, pdf.cursor - 10], size: 11, style: :bold
     end
-    pdf.bounding_box([175,pdf.cursor - 10], :width => 400) do
+    pdf.bounding_box([175,pdf.cursor - 20], :width => 400) do
+      pdf.text 'Number of different items :' + @command.items.count.to_s 
       pdf.text "--------------------------------"
       pdf.draw_text "--------------------------------", :at => [0, pdf.cursor + 2]
       pdf.text " "
