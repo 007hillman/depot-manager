@@ -39,14 +39,18 @@
                 <ion-icon name="person-outline" size="small" style="stroke-width : 16px;"></ion-icon>
       </div>
     </div>
-    <div class=" py-3 bg-white px-10">
-      <%= yield %>
+    <div class="grid grid-cols-12 ">
+      <section  class="col-span-2">
+        <%= render partial: "/layouts/components/modals" %>
+        <%= render partial: "/layouts/components/leftpane" %>
+      </section>
+      <main class="col-start-3 col-span-10">
+        <div class=" py-3 bg-white px-10">
+          <%= yield %>
+        </div>
+      </main>
     </div>
-    <!--
-    <main class="container w-full  px-2 flex justify-center items-center bg-white border-2 border-red-700">
-      <%= yield %>
-    </main>
--->
+    
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
   </body>

@@ -1,0 +1,24 @@
+<section class="w-full " data-controller="debts">
+  <section class="w-full h-full bg-gray-700 absolute z-50 fixed top-0 left-0 bg-opacity-80  hidden" data-debts-target="modal">
+  <div class="flex justify-end">
+    <button class="bg-gray-100 font-bold px-3 py-1 rounded-l-full" data-action="click->debts#hide_modal">X</button>
+  </div>
+  <div class="flex justify-center items-center gap-4 w-full h-full">
+    <%= link_to "Receive money", new_payment_url , class: "bg-green-700 uppercase font-regular text-white px-20 py-10 bg-opacity-50 hover:font-bold hover:bg-opacity-90"%>
+    <button class="bg-red-700 uppercase font-regular text-white px-20 py-10 bg-opacity-50 hover:font-bold hover:bg-opacity-90">Receive crates</button>
+  </div>
+
+  </section>
+  <section class="w-full h-full bg-gray-700 absolute z-50 fixed top-0 left-0 bg-opacity-80  hidden" data-debts-target="mod2">
+    <div class="flex justify-end">
+      <button class="bg-gray-100 font-bold px-3 py-1 rounded-l-full" data-action="click->debts#hide_mod2">X</button>
+    </div>
+    <div class="flex justify-center items-center gap-4 w-full h-full">
+      <%= link_to "From Supplyer", purchases_path , class: "bg-yellow-400 uppercase font-regular text-white px-20 py-10 bg-opacity-50 hover:font-bold hover:bg-opacity-90"%>
+      <%= link_to "Other purchases", new_auxillary_purchase_path , class: "bg-red-700 uppercase font-regular text-white px-20 py-10 bg-opacity-50 hover:font-bold hover:bg-opacity-90"%>
+    </div>
+
+  </section>
+
+ 
+</section>

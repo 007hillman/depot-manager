@@ -1,11 +1,23 @@
-<div id="<%= dom_id command %>" class=" w-full">
+<div id="<%= dom_id command %>" class=" w-full mb-5" >
+    <%
+        transport = command.transportation ? Command.calculate_transport(command) : 0
+      command_total = Command.command_total(command) 
+  
+      amount_paid = command.amount_paid == nil ? 0 : command.amount_paid 
+    %>
   <p class="my-5">
     <strong class=" font-bold mb-1">Client name:</strong>
     <%=link_to command.client_name, static_client_path(name: command.client_name) , class: " px-4 py-1 text-md text-blue-600 hover:text-gray-100 hover:bg-blue-600 hover:font-semibold"%>
   </p>
-    <p class="my-5">
-    <strong class=" font-bold mb-1">Command date:</strong>
-    <%= command.created_at.strftime("%A, %d %B %Y") %>
+    <div class="my-5 grid grid-cols-2">
+      <div><strong class=" font-bold mb-1">Command date:</strong>
+    <%= command.created_at.strftime("%A, %d %B %Y") %></div>
+      <div><strong class=" font-bold mb-1 text-xl"> TOTAL :   </strong>
+    <span class="inline-block font-bold text-2xl ml-5"><%= command_total %></span></div>
+  </div>
+    <p class="my-5 flex">
+    <strong class=" font-bold mb-1">Comment : </strong>
+   <span> <%= command.remark %> </span> 
   </p>
   <div class="grid grid-cols-2">
     <div>Brasseries crates needed : <%= Crate.brassseries_crates_needed(command) %> </div>
@@ -55,12 +67,7 @@
     
     <% end %>
   </ul>
-    <%
-        transport = command.transportation ? Command.calculate_transport(command) : 0
-      command_total = Command.command_total(command) 
-  
-      amount_paid = command.amount_paid == nil ? 0 : command.amount_paid 
-    %>
+
   </div>
     <div class="grid grid-cols-5 mb-8">
     <div class=" col-span-2 pl-4">Transportation : </div><div></div><div></div><div class="pl-8 gap-4"> <%= transport %></div>
@@ -79,7 +86,5 @@
     <hr class="mt-6">
   <% end %>
 </div>
-  <p class="my-5 flex">
-    <strong class=" font-bold mb-1">Comment : </strong>
-   <span> <%= command.remark %> </span> 
-  </p>
+
+<hr>

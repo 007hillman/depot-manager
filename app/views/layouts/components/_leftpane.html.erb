@@ -1,0 +1,82 @@
+<section class="flex flex-col bg-gray-800 rounded-l-md items-center justify-center py-4 gap-2 " data-controller="debts">
+    <div class=" flex justify-start items-center hover:bg-gray-100 hover:text-gray-900 w-full pl-4">
+        <%= link_to  drinks_path , class: "flex items-center" do %>
+          <div class=" inline flex items-center justify-center inline-block border-2 border-blue-400 rounded-full w-12 h-full text-white hover:text-gray-900"">
+            <ion-icon name="pricetags-outline"></ion-icon>
+          </div>
+          <div class=" inline flex items-center pl-4 py-2 text-white hover:text-gray-900"">
+            Drinks
+          </div>
+        <% end %>
+    </div>
+    <div class=" flex justify-start items-center hover:bg-white hover:text-gray-900 w-full pl-4">
+        <%= link_to  commands_path , class: "flex items-center" do %>
+          <div class=" inline flex items-center justify-center inline-block border-2 border-blue-400 rounded-full w-12 h-full text-white hover:text-gray-900"">
+            <ion-icon name="cart-outline"></ion-icon>
+          </div>
+          <div class=" inline flex items-center pl-4 py-2 text-white hover:text-gray-900"">
+            Commands
+          </div>
+        <% end %>
+    </div>
+    <div class=" flex justify-start items-center hover:bg-white hover:text-gray-900 w-full pl-4">
+        <%= link_to  clients_path , class: "flex items-center" do %>
+          <div class=" inline flex items-center justify-center inline-block border-2 border-blue-400 rounded-full w-12 h-full text-white hover:text-gray-900"">
+            <ion-icon name="people-outline"></ion-icon>
+          </div>
+          <div class=" inline flex items-center pl-4 py-2 text-white hover:text-gray-900"">
+            Clients
+          </div>
+        <% end %>
+    </div>
+    <div class=" flex justify-start items-center hover:bg-white hover:text-gray-900 w-full pl-4">
+        <%= link_to  crates_path , class: "flex items-center" do %>
+          <div class=" inline flex items-center justify-center inline-block border-2 border-blue-400 rounded-full w-12 h-full text-white hover:text-gray-900">
+            <ion-icon name="cube-outline"></ion-icon>
+          </div>
+          <div class=" inline flex items-center pl-4 py-2 text-white hover:text-gray-900">
+            Crates
+          </div>
+        <% end %>
+    </div>
+    <div class=" flex justify-start items-center hover:bg-white hover:text-gray-900 w-full pl-4" data-action="click->debts#show_modal">
+        <%= link_to  "#" , class: "flex items-center" do %>
+          <div class=" inline flex items-center justify-center inline-block border-2 border-blue-400 rounded-full w-12 h-full text-white hover:text-gray-900">
+            <ion-icon name="cash-outline"></ion-icon>
+          </div>
+          <div class=" inline flex items-center pl-4 py-2 text-white hover:text-gray-900">
+            Transaction
+          </div>
+        <% end %>
+    </div>
+    <div class=" flex justify-start items-center hover:bg-white hover:text-gray-900 w-full pl-4" data-action="click->debts#show_mod2">
+        <%= link_to  "#", class: "flex items-center" do %>
+          <div class=" inline flex items-center justify-center inline-block border-2 border-blue-400 rounded-full w-12 h-full text-white hover:text-gray-900">
+            <ion-icon name="wallet-outline"></ion-icon>
+          </div>
+          <div class=" inline flex items-center pl-4 py-2 text-white hover:text-gray-900">
+            Procurement
+          </div>
+        <% end %>
+    </div>
+    <div class=" flex justify-start items-center hover:bg-white hover:text-gray-900 w-full pl-4" >
+        <%= link_to  static_accounting_path , class: "flex items-center" do %>
+          <div class=" inline flex items-center justify-center inline-block border-2 border-blue-400 rounded-full w-12 h-full text-white hover:text-gray-900">
+            <ion-icon name="wallet-outline"></ion-icon>
+          </div>
+          <div class=" inline flex items-center pl-4 py-2 text-white hover:text-gray-900">
+            Accounting
+          </div>
+        <% end %>
+    </div>
+        <div class=" flex justify-start items-center hover:bg-white hover:text-gray-900 w-full pl-4" >
+        <%= link_to  functions_goods_consumption_path , class: "flex items-center" do %>
+          <div class=" inline flex items-center justify-center inline-block border-2 border-blue-400 rounded-full w-12 h-full text-white hover:text-gray-900">
+            <ion-icon name="wallet-outline"></ion-icon>
+          </div>
+          <div class=" inline flex items-center pl-4 py-2 text-white hover:text-gray-900">
+            Consumption
+          </div>
+        <% end %>
+    </div>
+</section>
