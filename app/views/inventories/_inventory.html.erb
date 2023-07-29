@@ -3,11 +3,15 @@
     <strong class="block font-medium mb-1">Drink:</strong>
     <%= inventory.foreign_id %>
   </p>
-
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Drink:</strong>
+    <%= Drink.find(inventory.drink_id).name %>
+  </p>
   <p class="my-5">
     <strong class="block font-medium mb-1">Quantity:</strong>
     <%= inventory.quantity %>
   </p>
+
 
   <p class="my-5">
     <strong class="block font-medium mb-1">Action:</strong>

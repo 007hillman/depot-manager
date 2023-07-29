@@ -52,6 +52,7 @@ class CommandsController < ApplicationController
     
     respond_to do |format|
       if @command.save
+        Inventory.reduce_inventory(@command)
         format.html { redirect_to command_url(@command), notice: "Command was successfully created." }
         format.json { render :show, status: :created, location: @command }
       else
@@ -65,6 +66,7 @@ class CommandsController < ApplicationController
   def update
     respond_to do |format|
       if @command.update(command_params)
+        Inventory.update_on_command(@command)
         if command_params[:paid] == 1.to_s
           c = Command.find(@command.id)
           c.amount_paid = Command.command_total(@command) 
@@ -86,8 +88,8 @@ class CommandsController < ApplicationController
 
   # DELETE /commands/1 or /commands/1.json
   def destroy
+    Inventory.delete_on_command_delete(@command)
     @command.destroy
-
     respond_to do |format|
       format.html { redirect_to commands_url, notice: "Command was successfully destroyed." }
       format.json { head :no_content }

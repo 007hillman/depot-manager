@@ -3,7 +3,11 @@ class InventoriesController < ApplicationController
 
   # GET /inventories or /inventories.json
   def index
-    @inventories = Inventory.all
+    @inventories = Inventory.all.order("created_at desc")
+    @drinks_hash = {}
+    Drink.all.order(:name).each do |drink|
+      @drinks_hash[drink.name] = 0
+    end
   end
 
   # GET /inventories/1 or /inventories/1.json

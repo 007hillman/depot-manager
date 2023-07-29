@@ -28,6 +28,7 @@ class PurchasesController < ApplicationController
 
     respond_to do |format|
       if @purchase.save
+        Inventory.add_inventory(@purchase)
         format.html { redirect_to purchase_url(@purchase), notice: "Purchase was successfully created." }
         format.json { render :show, status: :created, location: @purchase }
       else
@@ -41,6 +42,7 @@ class PurchasesController < ApplicationController
   def update
     respond_to do |format|
       if @purchase.update(purchase_params)
+        Inventory.update_on_purchase_change(@purchase)
         format.html { redirect_to purchase_url(@purchase), notice: "Purchase was successfully updated." }
         format.json { render :show, status: :ok, location: @purchase }
       else
@@ -52,6 +54,7 @@ class PurchasesController < ApplicationController
 
   # DELETE /purchases/1 or /purchases/1.json
   def destroy
+    Inventory.delete_on_purchase_delete(@purchase)
     @purchase.destroy
 
     respond_to do |format|
