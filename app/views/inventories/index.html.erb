@@ -11,6 +11,9 @@
   <div id="inventories" class="min-w-full">
     <%# render @inventories %>
   </div>   -->
+  <% if @inventories == nil %>
+    <p> no entries yet </p>
+  <% else %>
   <% @inventories.each do |entry| %>
       <% drink = Drink.find(entry.drink_id).name %>
       <% if entry.action == "purchased" %>
@@ -29,6 +32,7 @@
         <div> <%= k %> </div>
         <div> <%= v %> </div>
       </div>
+    <% end %>
     <% end %>
   </section>
 </div>
