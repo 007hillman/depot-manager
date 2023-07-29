@@ -14,7 +14,8 @@ export default class extends Controller {
   }
   show_modal(event){
     event.preventDefault()
-    this.modalTarget.classList.toggle("hidden")
+    // this.modalTarget.classList.toggle("hidden")
+    document.getElementById("modal").classList.toggle("hidden")
   }
   hide_modal(event){
     event.preventDefault()
@@ -22,7 +23,8 @@ export default class extends Controller {
   }
   show_mod2(event){
     event.preventDefault()
-    this.mod2Target.classList.toggle("hidden")
+    // this.mod2Target.classList.toggle("hidden")
+    document.getElementById("mod2").classList.toggle("hidden")
   }
   hide_mod2(event){
     event.preventDefault()
