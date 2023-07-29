@@ -14,13 +14,13 @@ class Inventory < ApplicationRecord
   end
   def self.update_on_command (command)
     Inventory.where(foreign_id: command.id).destroy_all
-    if command.created_at.strftime("%Y-%m-%d") >= "29-07-2023" 
+    if command.created_at >= Date.strptime("29-07-2023","%Y-%m-%d") 
       reduce_inventory(command)
     end
   end
   def self.update_on_purchase_change(purchase)
     Inventory.where(foreign_id: purchase.id).destroy_all
-    if purchase.created_at.strftime("%Y-%m-%d") >= "29-07-2023" 
+    if purchase.created_at >= Date.strptime("29-07-2023","%Y-%m-%d") 
       Inventory.add_inventory(purchase)
     end
   end
