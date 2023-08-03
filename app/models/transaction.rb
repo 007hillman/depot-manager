@@ -44,10 +44,11 @@ class Transaction < ApplicationRecord
     def self.get_profit_for_command(command)
         profit = 0
             command.items.each do |item|
+            discount = item.discount == nil ? 0 : item.discount
                 if item.bottles
-                    profit += ((item.drink.retail_price - item.discount )- (item.drink.buying_cost/item.drink.number_per_package))* (item.quantity == nil ? 0 : item.quantity)
+                    profit += ((item.drink.retail_price - discount )- (item.drink.buying_cost/item.drink.number_per_package))* (item.quantity == nil ? 0 : item.quantity)
                 else
-                    profit += ((item.drink.wholesale_price - item.discount) - item.drink.buying_cost)*(item.quantity == nil ? 0 : item.quantity)
+                    profit += ((item.drink.wholesale_price - discount) - item.drink.buying_cost)*(item.quantity == nil ? 0 : item.quantity)
                 end
             end
         return profit.round(1)
