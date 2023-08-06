@@ -7,8 +7,14 @@
     <h1 class="font-bold text-4xl">Clients</h1>
     <%= link_to 'New client', new_client_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
   </div>
+  <div class=" mt-5 w-full flex justify-center items-center">
+    <%= form_with url: clients_path , method: :get, class: "w-full flex border border-blue-200 hover:border-blue-400 hover:border-2 focus:border-2 focus:border-blue-400 rounded-lg" do |form|%>
+      <%= form.text_field :query , class: "grow border-0" %>
+      <%= form.submit "search" , class: "bg-blue-400 px-6 rounded-r-lg" %>
+    <% end %>
+  </div>
 
-  <div id="clients" class="min-w-full mt-10">
+  <div id="clients" class="min-w-full mt-5">
     <ul class="grid grid-cols-4 gap-4">
       <% @clients.each do |client| %>
         <% if total_owed(client.name) > 0 %>
