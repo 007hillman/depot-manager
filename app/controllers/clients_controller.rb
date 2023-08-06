@@ -4,7 +4,9 @@ class ClientsController < ApplicationController
   # GET /clients or /clients.json
   def index
     if params[:query]
-      @clients = Client.global_search(params[:query])
+     @pagy, @clients = pagy(Client.global_search(params[:query]))
+    elsif !params[:query]
+      @pagy, @clients = pagy(Client.all.order("name"))
     else
       @pagy, @clients = pagy(Client.all.order("name"))
     end
