@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_27_162942) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_09_125210) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -76,6 +76,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_27_162942) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "client_employees", force: :cascade do |t|
+    t.bigint "employee_id", null: false
+    t.bigint "client_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["client_id"], name: "index_client_employees_on_client_id"
+    t.index ["employee_id"], name: "index_client_employees_on_employee_id"
+  end
+
   create_table "clients", force: :cascade do |t|
     t.string "name"
     t.string "telephone"
@@ -133,6 +142,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_27_162942) do
     t.decimal "buying_cost", default: "0.0"
     t.decimal "safe_quantity", default: "0.0"
     t.decimal "government_price", default: "0.0"
+  end
+
+  create_table "employees", force: :cascade do |t|
+    t.string "name"
+    t.string "surname"
+    t.date "date_of_birth"
+    t.decimal "salary"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "goods", force: :cascade do |t|
@@ -220,6 +238,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_27_162942) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "client_employees", "clients"
+  add_foreign_key "client_employees", "employees"
   add_foreign_key "crates", "clients"
   add_foreign_key "goods", "drinks"
   add_foreign_key "goods", "purchases"
