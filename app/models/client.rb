@@ -11,7 +11,8 @@ class Client < ApplicationRecord
 def self.total_owed(client_name, sent_date)
   sum = 0
   @commands = Command.global_search(client_name)
-  @commands.each do |command|
+  filtered_c = @commands.select {|x| x.paid == false}
+  filtered_c.each do |command|
     command_total = Command.command_total(command)
     amount_paid = command.amount_paid == nil ? 0 : command.amount_paid
       if command.created_at.strftime("%Y-%m-%d") >= sent_date.strftime("%Y-%m-%d")
@@ -34,6 +35,6 @@ def self.get_debtors
       client_hash[command.client_name] += command_total - amount_paid
     end
   end
-  return client_hash
+  return client_hash.sort_by {|key| key}.to_h
 end
 end

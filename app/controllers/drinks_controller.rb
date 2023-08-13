@@ -6,7 +6,7 @@ class DrinksController < ApplicationController
     if params[:query]
       @drinks= Drink.global_search(params[:query]).order("name")
     else
-      @drinks = Drink.all.order("name")
+      @pagy, @drinks = pagy(Drink.all.order("name"))
     end
     if turbo_frame_request?
       render partial: "bands", locals: { bands: @bands }
