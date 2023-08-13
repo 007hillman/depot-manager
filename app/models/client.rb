@@ -26,7 +26,8 @@ def self.get_debtors
   Client.all.each do |client|
     client_hash[client.name] = 0
   end
-  Command.all.each do |command|
+  filtered_commands = Command.where(paid: false)
+  filtered_commands.each do |command|
     command_total = Command.command_total(command)
     amount_paid = command.amount_paid == nil ? 0 : command.amount_paid
     if client_hash[command.client_name] != nil
