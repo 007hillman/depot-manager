@@ -5,8 +5,14 @@ class InventoriesController < ApplicationController
   def index
     @inventories = Inventory.all.order("created_at desc")
     @drinks_hash = {}
-    Drink.all.order(:name).each do |drink|
-      @drinks_hash[drink.name] = 0
+    if params[:supplyer]
+      Drink.where(supplyer: params[:supplyer]).order(:name).each do |drink|
+        @drinks_hash[drink.name] = 0
+      end
+    else
+      Drink.all.order(:name).each do |drink|
+        @drinks_hash[drink.name] = 0
+      end
     end
   end
 

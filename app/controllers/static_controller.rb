@@ -1,8 +1,7 @@
 class StaticController < ApplicationController
   before_action :authenticate_user!, only: [:accounting]
   def home
-    @reminders = Reminder.all
-    @rem = Reminder.new
+    @debtors = Client.get_debtors
   end
   def client
     client_name = Client.global_search(params[:name])
