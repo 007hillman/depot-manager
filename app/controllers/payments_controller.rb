@@ -1,6 +1,6 @@
 class PaymentsController < ApplicationController
   before_action :set_payment, only: %i[ show edit update destroy ]
-
+  $old_amount = 0
   # GET /payments or /payments.json
   def index
     @payments = Payment.all
@@ -17,6 +17,7 @@ class PaymentsController < ApplicationController
 
   # GET /payments/1/edit
   def edit
+    $old_amount = @payment.amount
   end
 
   # POST /payments or /payments.json
@@ -25,7 +26,7 @@ class PaymentsController < ApplicationController
 
     respond_to do |format|
       if @payment.save
-        Transaction.create(amount: @payment.amount_paid,client_id: @payment.client_id, payment_id: @payment.id)
+        Payment.on_create_payment(client_id: @payment.client_id, amount: @payment.amount)
         format.html { redirect_to payment_url(@payment), notice: "Payment was successfully created." }
         format.json { render :show, status: :created, location: @payment }
       else
@@ -39,6 +40,8 @@ class PaymentsController < ApplicationController
   def update
     respond_to do |format|
       if @payment.update(payment_params)
+        puts $old_amount.to_s + ".................................."
+        Payment.on_update_payment(client_id: @payment.client_id, amount: @payment.amount, old_amount: $old_amount)
         format.html { redirect_to payment_url(@payment), notice: "Payment was successfully updated." }
         format.json { render :show, status: :ok, location: @payment }
       else
@@ -50,6 +53,7 @@ class PaymentsController < ApplicationController
 
   # DELETE /payments/1 or /payments/1.json
   def destroy
+    Payment.on_delete_payment(client_id: @payment.client_id, amount: @payment.amount)
     @payment.destroy
 
     respond_to do |format|
@@ -66,6 +70,6 @@ class PaymentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def payment_params
-      params.require(:payment).permit(:client_id, :amount_paid, :command_id)
+      params.require(:payment).permit(:client_id,  :amount)
     end
 end

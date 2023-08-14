@@ -2,10 +2,8 @@
 
 one:
   client: one
-  amount_paid: 9.99
-  command: one
+  amount: 9.99
 
 two:
   client: two
-  amount_paid: 9.99
-  command: two
+  amount: 9.99

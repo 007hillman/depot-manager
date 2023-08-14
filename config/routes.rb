@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :payments
   resources :employees
   devise_for :admins
   devise_for :users
@@ -6,7 +7,6 @@ Rails.application.routes.draw do
   resources :auxillary_purchases
   resources :purchases
   resources :crates
-  resources :payments
   resources :commands
   resources :inventories
   resources :drinks
