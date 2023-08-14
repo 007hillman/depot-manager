@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_09_125210) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_14_134709) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -186,12 +186,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_09_125210) do
 
   create_table "payments", force: :cascade do |t|
     t.bigint "client_id", null: false
-    t.decimal "amount_paid"
+    t.decimal "amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "command_id", null: false
     t.index ["client_id"], name: "index_payments_on_client_id"
-    t.index ["command_id"], name: "index_payments_on_command_id"
   end
 
   create_table "purchases", force: :cascade do |t|
@@ -210,18 +208,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_09_125210) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "transactions", force: :cascade do |t|
-    t.decimal "amount"
-    t.string "type", default: "Money"
-    t.string "direction", default: "In"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "client_id", null: false
-    t.bigint "payment_id", null: false
-    t.index ["client_id"], name: "index_transactions_on_client_id"
-    t.index ["payment_id"], name: "index_transactions_on_payment_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -246,8 +232,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_09_125210) do
   add_foreign_key "items", "commands"
   add_foreign_key "items", "drinks"
   add_foreign_key "payments", "clients"
-  add_foreign_key "payments", "commands"
   add_foreign_key "purchases", "suppliers"
-  add_foreign_key "transactions", "clients"
-  add_foreign_key "transactions", "payments"
 end

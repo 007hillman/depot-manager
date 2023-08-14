@@ -14,9 +14,8 @@ class PaymentsTest < ApplicationSystemTestCase
     visit payments_url
     click_on "New payment"
 
-    fill_in "Amount paid", with: @payment.amount_paid
+    fill_in "Amount", with: @payment.amount
     fill_in "Client", with: @payment.client_id
-    fill_in "Command", with: @payment.command_id
     click_on "Create Payment"
 
     assert_text "Payment was successfully created"
@@ -27,9 +26,8 @@ class PaymentsTest < ApplicationSystemTestCase
     visit payment_url(@payment)
     click_on "Edit this payment", match: :first
 
-    fill_in "Amount paid", with: @payment.amount_paid
+    fill_in "Amount", with: @payment.amount
     fill_in "Client", with: @payment.client_id
-    fill_in "Command", with: @payment.command_id
     click_on "Update Payment"
 
     assert_text "Payment was successfully updated"

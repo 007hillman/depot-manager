@@ -10,29 +10,18 @@
       </ul>
     </div>
   <% end %>
-<div data-controller="debts">
+
   <div class="my-5">
     <%= form.label :client_id %>
-    <%= form.text_field :client_id, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" , data: {action: "keyup->debts#search_names"}, id: "name_field" %>
-    <div id="">
-      <ul id="result">
-      
-      </ul>
-     </div>
+    <%= form.select :client_id, options_for_select(Client.all.order("name asc").map {|x| [x.name, x.id]}, selected:form.object.client_id),{} , {class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full"} %>
   </div>
 
   <div class="my-5">
-    <%= form.label :amount_paid %>
-    <%= form.text_field :amount_paid, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full", required: true %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label :command_id %>
-    <%= form.text_field :command_id, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" , placeholder: "enter the command id on the receipt", required: true%>
+    <%= form.label :amount %>
+    <%= form.text_field :amount, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
   <div class="inline">
     <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
   </div>
-</div>
 <% end %>
