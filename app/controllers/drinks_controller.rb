@@ -4,7 +4,7 @@ class DrinksController < ApplicationController
   # GET /drinks or /drinks.json
   def index
     if params[:query]
-      @drinks= Drink.global_search(params[:query]).order("name")
+      @pagy, @drinks= pagy(Drink.global_search(params[:query]).order("name"))
     else
       @pagy, @drinks = pagy(Drink.all.order("name"))
     end

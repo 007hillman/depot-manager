@@ -4,6 +4,7 @@ class Inventory < ApplicationRecord
 
   def self.add_inventory( purchase)
     purchase.goods.each do |good|
+      drink = Drink.find(good.drink_id)
       Inventory.create(drink_id: good.drink_id , quantity: good.quantity, action: "purchased",  foreign_id: purchase.id)
     end
   end
