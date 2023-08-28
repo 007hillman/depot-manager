@@ -7,7 +7,7 @@ class Transaction < ApplicationRecord
             commands = Command.all.select {|x| x.created_at.strftime("%Y-%m-%d") == Date.today.strftime("%Y-%m-%d") }
         end
         commands.each do |command|
-            if command.amount_paid > 0.0
+            if command.amount_paid >= 0.0
                profit += get_profit_for_command(command)
             end
         end

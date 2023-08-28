@@ -1,5 +1,6 @@
 class Payment < ApplicationRecord
   belongs_to :client
+  
   def self.on_create_payment(**args)
     paid = args[:amount]
     commands = Command.where(paid: false, client_name: Client.find(args[:client_id]).name)
