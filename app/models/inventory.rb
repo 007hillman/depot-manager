@@ -5,12 +5,24 @@ class Inventory < ApplicationRecord
   def self.add_inventory( purchase)
     purchase.goods.each do |good|
       drink = Drink.find(good.drink_id)
-      Inventory.create(drink_id: good.drink_id , quantity: good.quantity, action: "purchased",  foreign_id: purchase.id)
+      quantum = 0
+      if !good.bottles
+        quantum = drink.number_per_package * good.quantity 
+      else
+        quantum = good.quantity 
+      end
+      Inventory.create(drink_id: good.drink_id , quantity: quantum, action: "purchased",  foreign_id: purchase.id)
     end
   end
   def self.reduce_inventory(command)
     command.items.each do |item|
-      Inventory.create(drink_id: item.drink_id , quantity: item.quantity, action: "sold", foreign_id: command.id)
+      quantum = 0
+      if !item.bottles
+        quantum = item.drink.number_per_package * item.quantity 
+      else
+        quantum = item.quantity 
+      end
+      Inventory.create(drink_id: item.drink_id , quantity: quantum, action: "sold", foreign_id: command.id)
     end
   end
   def self.update_on_command (command)
