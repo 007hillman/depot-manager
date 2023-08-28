@@ -21,7 +21,7 @@
   <% @inventories.each do |entry| %>
       <% drink = Drink.find(entry.drink_id).name %>
       <% if entry.action == "purchased" and @drinks_hash[drink] != nil %>
-        <% @drinks_hash[drink] += entry.quantity %>
+        <% @drinks_hash[drink] += (entry.quantity) %>
       <% elsif entry.action == "sold"  and @drinks_hash[drink] != nil %>
         <% @drinks_hash[drink] -= entry.quantity %>
       <% end %>
