@@ -5,6 +5,9 @@ class InventoriesController < ApplicationController
   def index
     @inventories = Inventory.all.order("created_at desc")
     @drinks_hash = {}
+    if params[:command] == "initialize"
+      Inventory.delete_all
+    end
     if params[:supplyer]
       Drink.where(supplyer: params[:supplyer]).order(:name).each do |drink|
         @drinks_hash[drink.name] = 0
@@ -14,7 +17,24 @@ class InventoriesController < ApplicationController
         @drinks_hash[drink.name] = 0
       end
     end
+    @inventories.each do |entry|
+      drink = Drink.find(entry.drink_id).name
+      if entry.action == "purchased" and @drinks_hash[drink] != nil
+        @drinks_hash[drink] += (entry.quantity)
+      elsif entry.action == "sold"  and @drinks_hash[drink] != nil
+        @drinks_hash[drink] -= entry.quantity
+      end
+    end
+    # counting drinks in packages
+    @palette_hash = {}
+    @remainder_hash = {}
+    @drinks_hash.each do |name, quantity|
+      drink_quantity = Drink.where(name: name)[0].number_per_package
+      @palette_hash[name] = (quantity / drink_quantity).to_i
+      @remainder_hash[name] = quantity % drink_quantity
+    end
   end
+
 
   # GET /inventories/1 or /inventories/1.json
   def show
