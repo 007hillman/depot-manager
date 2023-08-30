@@ -5,6 +5,7 @@
 
   <div class="flex justify-between items-center">
     <h1 class="font-bold text-4xl">Inventories</h1>
+    <%= link_to 'Reinitialize' , inventories_path(command: :initialize), class: "" %>
     <%= link_to 'New inventory', new_inventory_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
   </div>
 <!--
@@ -18,14 +19,7 @@
   <% if @inventories == nil %>
     <p> no entries yet </p>
   <% else %>
-  <% @inventories.each do |entry| %>
-      <% drink = Drink.find(entry.drink_id).name %>
-      <% if entry.action == "purchased" and @drinks_hash[drink] != nil %>
-        <% @drinks_hash[drink] += (entry.quantity) %>
-      <% elsif entry.action == "sold"  and @drinks_hash[drink] != nil %>
-        <% @drinks_hash[drink] -= entry.quantity %>
-      <% end %>
-  <% end %>
+
   <section class="grid grid-cols-4 gap-2 mt-5">
     <% @drinks_hash.each do |k,v| %>
       <% if v < 0 %>
