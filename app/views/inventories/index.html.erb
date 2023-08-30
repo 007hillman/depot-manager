@@ -5,7 +5,9 @@
 
   <div class="flex justify-between items-center">
     <h1 class="font-bold text-4xl">Inventories</h1>
-    <%= link_to 'Reinitialize' , inventories_path(command: :initialize), class: "" %>
+    <% if current_user %>
+      <%= link_to 'Reinitialize' , inventories_path(command: :initialize), class: "text-red-400" %>
+    <% end %>
     <%= link_to 'New inventory', new_inventory_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
   </div>
 <!--
@@ -28,7 +30,8 @@
       <div class="flex flex-col border border-2 border-blue-200">
       <% end %>
         <div> <%= k %> </div>
-        <div> <%= v %> </div>
+        <div> <%= v %> bottle(s) total</div>
+        <div> <%= @palette_hash[k] %> palettes + <%= @remainder_hash[k] %> bottles</div>
       </div>
     <% end %>
     <% end %>

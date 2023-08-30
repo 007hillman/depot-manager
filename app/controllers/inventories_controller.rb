@@ -25,6 +25,14 @@ class InventoriesController < ApplicationController
         @drinks_hash[drink] -= entry.quantity
       end
     end
+    # counting drinks in packages
+    @palette_hash = {}
+    @remainder_hash = {}
+    @drinks_hash.each do |name, quantity|
+      drink_quantity = Drink.where(name: name)[0].number_per_package
+      @palette_hash[name] = (quantity / drink_quantity).to_i
+      @remainder_hash[name] = quantity % drink_quantity
+    end
   end
 
 
