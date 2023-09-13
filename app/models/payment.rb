@@ -3,7 +3,7 @@ class Payment < ApplicationRecord
   
   def self.on_create_payment(**args)
     paid = args[:amount]
-    commands = Command.where(paid: false, client_name: Client.find(args[:client_id]).name)
+    commands = Command.where(paid: false, client_name: Client.global_search(Client.find(args[:client_id]).name)[0])
     commands.each do |command|
       command_total = Command.command_total(command)
       amount_paid = command.amount_paid
@@ -31,7 +31,7 @@ class Payment < ApplicationRecord
   def self.on_delete_payment(**args)
     paid = args[:amount]
     commands = Command.where(client_name: Client.find(args[:client_id]).name)
-    commands.each do |command|
+    commands.reverse.each do |command|
       command_total = Command.command_total(command)
       if paid > 0
         command.paid = false
