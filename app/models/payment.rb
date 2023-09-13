@@ -3,7 +3,7 @@ class Payment < ApplicationRecord
   
   def self.on_create_payment(**args)
     paid = args[:amount]
-    commands = Command.where(paid: false, client_name: Client.global_search(Client.find(args[:client_id]).name)[0])
+    commands = Command.where(paid: false, client_name: Client.global_search(Client.find(args[:client_id]).name)[0].name)
     commands.each do |command|
       command_total = Command.command_total(command)
       amount_paid = command.amount_paid
