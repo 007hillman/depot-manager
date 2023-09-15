@@ -43,5 +43,13 @@ static targets = ["itemRow", "template", "items", "query"]
     list.innerHTML = ""
     document.querySelector("#search_field").focus()
   }
-  
+  async check_stock(event){
+    var selected_id = event.target.value
+    await fetch (`http://localhost:3000/commands/?check=${selected_id}`, {
+        headers: { accept: 'application/json'},
+    }).then((response) => response.json()).then((data)=>{
+      var fin = event.target.closest(".item-field").querySelector("#display")
+      fin.innerText = "IN STOCK : " + data.commands.crates + data.commands.packaging + " ; " + data.commands.bottles + "bottles"
+    })
+  }
   }

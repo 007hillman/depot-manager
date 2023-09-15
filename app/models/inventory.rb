@@ -43,4 +43,22 @@ class Inventory < ApplicationRecord
   def self.delete_on_purchase_delete(purchase)
     Inventory.where(foreign_id: purchase.id).destroy_all
   end
+
+  def self.get_quantity(sent_id)
+    drink_quantum = {bottles: 0, crates: 0, package: ""}
+
+    Inventory.all.each do |entry|
+      if entry.action == "purchased" and entry.drink_id == sent_id
+        drink_quantum[:bottles] += (entry.quantity)
+      elsif entry.action == "sold"  and entry.drink_id == sent_id
+        drink_quantum[:bottles] -= entry.quantity
+      end
+    end
+    drink = Drink.find(sent_id)
+    tmp = drink_quantum[:bottles]
+    drink_quantum[:crates] = (tmp / drink.number_per_package).to_i
+    drink_quantum[:bottles] = tmp % drink.number_per_package
+    drink_quantum[:package] = drink.packaging 
+    return drink_quantum
+  end
 end
