@@ -31,10 +31,10 @@ def self.get_debtors
   filtered_commands.each do |command|
     command_total = Command.command_total(command)
     amount_paid = command.amount_paid == nil ? 0 : command.amount_paid
-    if client_hash[command.client_name] != nil
+    if client_hash[command.client_name]
       client_hash[command.client_name] += command_total - amount_paid
     end
   end
-  return client_hash.sort_by {|key| key}.to_h
+  return client_hash.sort_by {|key| key}
 end
 end

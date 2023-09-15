@@ -17,6 +17,10 @@ class CommandsController < ApplicationController
       if params[:message] == "all"
         @commands= Command.all.order("created_at DESC")
       end
+    elsif params[:check]
+      id = params[:check].to_i
+      quanta = Inventory.get_quantity(id)
+      @commands = quanta
     else
       @commands = Command.all.order("created_at DESC").select {|x| x.created_at.strftime("%Y-%m-%d") == Date.today.strftime("%Y-%m-%d") }
       @date = Date.today.strftime("%Y-%m-%d")
