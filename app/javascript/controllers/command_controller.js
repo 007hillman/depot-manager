@@ -49,7 +49,7 @@ static targets = ["itemRow", "template", "items", "query"]
         headers: { accept: 'application/json'},
     }).then((response) => response.json()).then((data)=>{
       var fin = event.target.closest(".item-field").querySelector("#display")
-      fin.innerText = "IN STOCK : " + data.commands.crates + data.commands.packaging + " ; " + data.commands.bottles + "bottles"
+      fin.innerText = "IN STOCK : " + data.commands.crates + " " + data.commands.package + "(s) ; " + data.commands.bottles + "bottles"
     })
   }
   }
