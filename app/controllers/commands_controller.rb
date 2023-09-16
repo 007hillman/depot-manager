@@ -70,7 +70,9 @@ class CommandsController < ApplicationController
   def update
     respond_to do |format|
       if @command.update(command_params)
-        Inventory.update_on_command(@command)
+        if @command.created_at.strftime("%Y-%m-%d") >= "2023-09-16"
+          Inventory.update_on_command(@command)
+        end
         if command_params[:paid] == 1.to_s
           c = Command.find(@command.id)
           c.amount_paid = Command.command_total(@command) 
