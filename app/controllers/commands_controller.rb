@@ -94,7 +94,9 @@ class CommandsController < ApplicationController
 
   # DELETE /commands/1 or /commands/1.json
   def destroy
-    Inventory.delete_on_command_delete(@command)
+    if @command.created_at.strftime("%Y-%m-%d") >= "2023-09-16"
+      Inventory.delete_on_command_delete(@command)
+    end
     @command.destroy
     respond_to do |format|
       format.html { redirect_to commands_url, notice: "Command was successfully destroyed." }
