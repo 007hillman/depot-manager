@@ -5,7 +5,7 @@
   </div>
   <div class="flex justify-center items-center gap-4 w-full h-full">
     <%= link_to "Receive money", new_payment_url , class: "bg-green-700 uppercase font-regular text-white px-20 py-10 bg-opacity-50 hover:font-bold hover:bg-opacity-90"%>
-    <button class="bg-red-700 uppercase font-regular text-white px-20 py-10 bg-opacity-50 hover:font-bold hover:bg-opacity-90">Receive crates</button>
+    <%= link_to "Other transactions", cash_movements_url , class: "bg-blue-700 uppercase font-regular text-white px-20 py-10 bg-opacity-50 hover:font-bold hover:bg-opacity-90"%>
   </div>
 
   </section>
@@ -15,7 +15,7 @@
     </div>
     <div class="flex justify-center items-center gap-4 w-full h-full">
       <%= link_to "From Supplyer", purchases_path , class: "bg-yellow-400 uppercase font-regular text-white px-20 py-10 bg-opacity-50 hover:font-bold hover:bg-opacity-90"%>
-      <%= link_to "Other purchases", new_auxillary_purchase_path , class: "bg-red-700 uppercase font-regular text-white px-20 py-10 bg-opacity-50 hover:font-bold hover:bg-opacity-90"%>
+      <%= link_to "Other purchases", auxillary_purchases_path , class: "bg-red-700 uppercase font-regular text-white px-20 py-10 bg-opacity-50 hover:font-bold hover:bg-opacity-90"%>
     </div>
 
   </section>

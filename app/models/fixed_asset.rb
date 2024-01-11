@@ -1,0 +1,2 @@
+class FixedAsset < ApplicationRecord
+end

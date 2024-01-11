@@ -22,6 +22,16 @@
         <% end %>
     </div>
     <div class=" flex justify-start items-center hover:bg-white hover:text-gray-900 w-full pl-4">
+        <%= link_to  fixed_assets_path , class: "flex items-center" do %>
+          <div class=" inline flex items-center justify-center inline-block border-2 border-blue-400 rounded-full w-12 h-full text-white hover:text-gray-900"">
+            <ion-icon name="building-outline"></ion-icon>
+          </div>
+          <div class=" inline flex items-center pl-4 py-2 text-white hover:text-gray-900"">
+            Assets
+          </div>
+        <% end %>
+    </div>
+    <div class=" flex justify-start items-center hover:bg-white hover:text-gray-900 w-full pl-4">
         <%= link_to  clients_path , class: "flex items-center" do %>
           <div class=" inline flex items-center justify-center inline-block border-2 border-blue-400 rounded-full w-12 h-full text-white hover:text-gray-900"">
             <ion-icon name="people-outline"></ion-icon>
@@ -58,6 +68,16 @@
           </div>
           <div class=" inline flex items-center pl-4 py-2 text-white hover:text-gray-900">
             Purchase
+          </div>
+        <% end %>
+    </div>
+    <div class=" flex justify-start items-center hover:bg-white hover:text-gray-900 w-full pl-4" >
+        <%= link_to  drawings_path , class: "flex items-center" do %>
+          <div class=" inline flex items-center justify-center inline-block border-2 border-blue-400 rounded-full w-12 h-full text-white hover:text-gray-900">
+            <ion-icon name="wallet-outline"></ion-icon>
+          </div>
+          <div class=" inline flex items-center pl-4 py-2 text-white hover:text-gray-900">
+            Drawings
           </div>
         <% end %>
     </div>

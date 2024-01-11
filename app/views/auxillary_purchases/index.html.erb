@@ -7,7 +7,9 @@
     <h1 class="font-bold text-4xl">Auxillary purchases</h1>
     <%= link_to 'New auxillary purchase', new_auxillary_purchase_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
   </div>
-
+  <div>
+    EXPENDITURE FOR TODAY : <%= @total %>
+  </div>
   <div id="auxillary_purchases" class="min-w-full">
     <%= render @auxillary_purchases %>
   </div>

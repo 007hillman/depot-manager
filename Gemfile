@@ -25,7 +25,8 @@ gem "turbo-rails"
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem "stimulus-rails"
 gem 'pg_search'
-
+#use sidekiq for background jobs
+gem 'sidekiq'
 # use the receipt gem in app
 gem 'receipts'
 #use simple form in our app

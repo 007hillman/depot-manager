@@ -1,0 +1,31 @@
+<div id="<%= dom_id cash_movement %>"  class=" grid grid-cols-4 ">
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Amount:</strong>
+    <%= cash_movement.amount %>
+  </p>
+  <% if cash_movement.cash_in %>
+    <p class="my-5">
+      <strong class="block font-medium mb-1">Cash in:</strong>
+      <%= cash_movement.cash_in %>
+    </p>
+  <% end %>
+  <% if cash_movement.cash_out %>
+    <p class="my-5">
+      <strong class="block font-medium mb-1">Cash out:</strong>
+      <%= cash_movement.cash_out %>
+    </p>
+  <% end %>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Person:</strong>
+    <%= cash_movement.person %>
+  </p>
+
+  <% if action_name != "show" %>
+  <div>
+    <%= link_to "Show this cash movement", cash_movement, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= link_to 'Edit this cash movement', edit_cash_movement_path(cash_movement), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+  </div>
+  <% end %>
+</div>
+    <hr class="mt-6">

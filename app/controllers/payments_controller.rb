@@ -3,7 +3,11 @@ class PaymentsController < ApplicationController
   $old_amount = 0
   # GET /payments or /payments.json
   def index
-    @payments = Payment.all
+    if params[:query]
+      @payments = Payment.where(client_id: params[:query])
+    else
+      @payments = Payment.all
+    end
   end
 
   # GET /payments/1 or /payments/1.json

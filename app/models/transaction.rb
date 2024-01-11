@@ -11,7 +11,7 @@ class Transaction < ApplicationRecord
                profit += get_profit_for_command(command)
             end
         end
-        return profit
+        return profit + get_daily_transport 
     end
     def self.get_daily_transport
         transport_for_today = 0
@@ -38,7 +38,7 @@ class Transaction < ApplicationRecord
             week_start = current_date - (current_date.wday - i)%7
             i += 1
         end
-        profit_hash[current_date] = get_daily_profit(date: current_date)
+        profit_hash[current_date] = get_daily_profit(date: current_date) -  AuxillaryPurchase.sum_auxillary_purchase_for_today(current_date.strftime("%Y-%m-%d")) - Drawing.sum_drawing_for_today(current_date.strftime("%Y-%m-%d"))
         return profit_hash
     end
     def self.get_profit_for_command(command)

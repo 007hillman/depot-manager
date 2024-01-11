@@ -13,7 +13,12 @@
 
   <div class="my-5">
     <%= form.label :client_id %>
+
+    <% if client_name %>
+    <%= form.select :client_id, options_for_select(Client.all.order("name asc").map {|x| [x.name, x.id]}, selected: Client.global_search(client_name)[0].id),{} , {class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full"} %>
+    <% else %>
     <%= form.select :client_id, options_for_select(Client.all.order("name asc").map {|x| [x.name, x.id]}, selected:form.object.client_id),{} , {class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full"} %>
+    <% end %>
   </div>
 
   <div class="my-5">

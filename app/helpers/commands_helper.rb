@@ -23,17 +23,17 @@ module CommandsHelper
         end
         return amount
     end 
-    def guinness_money(commands)
+    def get_total(commands, company_name)
         amount = 0
         commands.each do |command|
-            if(command.payment_method == "Cash payment" and command.amount_paid != nil and command.amount_paid != 0.0)
+            if(command.amount_paid != nil)
                 command.items.each do |item|
-                    if(  Supplier.find(item.drink.supplyer).name == "Guinness Cameroun SA")
-                        # if item.bottles
-                        #     amount += ( ((item.drink.buying_cost * (item.quantity /item.drink.number_per_package))/command_total(command)) * command.amount_paid).round(1)
-                        # else
-                        #     amount += ( ((item.drink.buying_cost * item.quantity)/command_total(command)) * command.amount_paid).round(1)
-                        # end
+                    if(  Supplier.find(item.drink.supplyer).name == company_name)
+                        if item.bottles
+                            # amount += ( ((item.drink.buying_cost * (item.quantity /item.drink.number_per_package))/command_total(command)) * command.amount_paid).round(1)
+                        else
+                            amount += ( ((item.drink.buying_cost * item.quantity)/command_total(command)) * command.amount_paid).round(1)
+                        end
                     end
                 end
             end

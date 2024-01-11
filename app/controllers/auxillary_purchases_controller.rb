@@ -4,6 +4,7 @@ class AuxillaryPurchasesController < ApplicationController
   # GET /auxillary_purchases or /auxillary_purchases.json
   def index
     @auxillary_purchases = AuxillaryPurchase.all
+    @total = AuxillaryPurchase.sum_auxillary_purchase_for_today(Date.today.strftime("%Y-%m-%d"))
   end
 
   # GET /auxillary_purchases/1 or /auxillary_purchases/1.json

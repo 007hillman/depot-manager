@@ -25,6 +25,7 @@ class CommandsController < ApplicationController
       @commands = Command.all.order("created_at DESC").select {|x| x.created_at.strftime("%Y-%m-%d") == Date.today.strftime("%Y-%m-%d") }
       @date = Date.today.strftime("%Y-%m-%d")
     end
+      @result = generate_result_hash(@commands)
     respond_to do |format|
       format.html
       format.json { render json: { commands: @commands } }
@@ -103,7 +104,24 @@ class CommandsController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
+  def generate_result_hash(c)
+    res = {}
+    c.each do |command|
+      command.items.each do |item|
+        if res[Supplier.find(item.drink.supplyer).name]
+          if res[Supplier.find(item.drink.supplyer).name][item.drink.name]
+            res[Supplier.find(item.drink.supplyer).name][item.drink.name] += 1
+          else
+            res[Supplier.find(item.drink.supplyer).name][item.drink.name] = 1
+          end
+        else
+          res[Supplier.find(item.drink.supplyer).name] = {}
+          res[Supplier.find(item.drink.supplyer).name][item.drink.name] = 1
+        end
+      end
+    end
+    return res
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_command
@@ -113,7 +131,7 @@ class CommandsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def command_params
-      params.require(:command).permit(:transportation,:client_name,:created_at,:amount_paid,:paid, :payment_method, :brasseries_crates_given, :guinness_crates_given,:government,:remark, :delivered ,items_attributes: [:id,:quantity,:drink_id,:discount,:bottles,:_destroy])
+      params.require(:command).permit(:transportation,:client_name,:amount_paid,:paid, :payment_method, :brasseries_crates_given, :guinness_crates_given,:government,:remark, :delivered ,items_attributes: [:id,:quantity,:drink_id,:discount,:bottles,:_destroy])
     end
 
 end

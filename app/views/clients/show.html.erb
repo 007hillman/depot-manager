@@ -17,7 +17,7 @@
     <div class="col-span-2 pl-4"> Date</div> <div> Goods amount</div> <div>Amount paid</div> <div> Amount Owed</div> <div class="text-center">PR</div>
   </div>
 <ul class="mb-10">
-  <%@commands.order("created_at asc").each do |command| %>
+  <%@commands.order("created_at asc").last(10).each do |command| %>
     <%= link_to command_path(command) do %>
     <li class="hover:text-blue-300 hover:bg-gray-900 grid grid-cols-6 gap-10 py-2">
       <div class="col-span-2"> <%= command.created_at.strftime("%A, %d %B %Y") %></div>

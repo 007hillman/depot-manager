@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :cash_movements
+  resources :drawings
+  resources :fixed_assets
   resources :payments
   resources :employees
   devise_for :admins

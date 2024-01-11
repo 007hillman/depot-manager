@@ -1,7 +1,13 @@
 <div class="flex flex-col">
-    <div class="grid grid-cols-2 mb-2 gap-1">
-        <div class="border border-violet-400 px-4 py-1">Profit for today is : <%= @profit%> </div>
-        <div class="border  border-violet-400 px-4 py-1">Transport for today : <%= @transport%></div>
+    <div class="flex flex-col mb-2 gap-1">
+        <div class=" px-4 py-1">Profit for today is : <%= @profit - @transport%> </div>
+        <div class=" px-4 py-1">Transport for today : <%= @transport%></div>
+        <div class="px-4 py-1"> Gross Profit for today : <%= @profit %> </div>
+        <hr>
+        <div class="px-4 py-1"> Total expenditure for today : <%= @expenditure %> </div>
+        <div> Total drawing for today : <%= @drawing %> </div>
+        <hr>
+        <div> Net profit for today : <%= @profit - @expenditure - @drawing %> </div>
     </div>
     <div class="grid grid-cols-7 gap-2">
         <% @profit_array.each do |index, value| %>

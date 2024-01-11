@@ -106,7 +106,7 @@ end
         transport = Command.calculate_transport(@command)
       end
       total_for_command = (Command.command_total(@command)) 
-      total_owed = Client.total_owed(@command.client_name, @command.created_at)
+      total_owed = Client.total_owed(client_name: @command.client_name, command: @command)
       amount_paid = @command.amount_paid == nil ? 0.to_f : @command.amount_paid
       pdf.text 'transportation :           ' + transport.to_s
       sum_total += 0
@@ -155,6 +155,8 @@ end
       @profit_array = Transaction.get_weekly_profit
       @profit = Transaction.get_daily_profit(date: Date.today)
       @transport = Transaction.get_daily_transport
+      @expenditure = AuxillaryPurchase.sum_auxillary_purchase_for_today(Date.today.strftime("%Y-%m-%d"))
+      @drawing = Drawing.sum_drawing_for_today(Date.today.strftime("%Y-%m-%d"))
   end
   def generate_list
     drinks = Drink.all.order('supplyer desc').order("name asc")
@@ -163,7 +165,7 @@ end
     pdf.bounding_box([0,720], :width => 1000) do
       pdf.image "#{Rails.root}/app/assets/images/logo.png" , :scale => 0.20 
       pdf.draw_text "BEDOTA ENTERPRISE PRICE LIST", :at => [120, pdf.cursor  + 50], style: :bold , size: 20
-      pdf.draw_text 'Location: Clerks Quarters Buea , Tel: 673-513-775', :at => [120, pdf.cursor  + 35], style: :bold 
+      pdf.draw_text 'Location: Clerks Quarters Buea , Tel: 681-448-117', :at => [120, pdf.cursor  + 35], style: :bold 
     end
     pdf.stroke_horizontal_rule
     pdf.move_down 20
@@ -185,40 +187,3 @@ end
     end
   end
 end
-# @command = Command.find(params[:id])
-# @items = @command.items
-# amount_p = 0
-# if(@command.amount_paid != nil)
-#   amount_p = @command.amount_paid
-# end
-# array = []
-# array << ["<b>Item</b>", "<b>Unit Cost</b>", "<b>Quantity</b>", "<b>Amount</b>"]
-# @items.each do |item|
-#   array << [item.drink.name, item.drink.wholesale_price, item.quantity, item.drink.wholesale_price * item.quantity]
-# end
-# array << [nil, nil, "<b>TOTAL : </b>", command_total(@command)]
-# array << [nil, nil, "<b>Amount paid</b>", @command.amount_paid]
-# array << [nil, nil, "Change to be given on #{Date.today}", amount_p -  command_total(@command)]
-# r = Receipts::Receipt.new(
-#   details: [
-#     ["Receipt Number", @command.id],
-#     ["Date paid", Date.today],
-#     ["Payment method", @command.payment_method]
-#   ],
-#   company: {
-#     name: "<b>Company name : </b> BEDOTA Enterprises",
-#     address: "<b>Location : </b>Clerk's quarters \n <b>City : </b>Buea",
-#     email: "<b>Company email : </b>tatawhillman@gmail.com",
-#     logo: File.expand_path("./app/assets/images/logo.png"),
-#     logo_height: "48"
-#   },
-#   recipient: [
-#     " <b>Client name : </b>" + @command.client_name,
-#     "<b>Client's address : </b>",
-#     "<b>Client's city : </b>Buea, South West Region",
-#     nil,
-#     "<b>Client's email : </b>"
-#   ],
-#   line_items: array ,
-#   footer: "Thanks for doing business with us. Please contact us if you have any questions." 
-# )

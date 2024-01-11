@@ -6,7 +6,7 @@ module ClientsHelper
         @commands = Command.global_search(client_name)
             c= @commands.last
         if c != nil
-            sum = Client.total_owed(client_name, c.created_at)
+            sum = Client.total_owed(client_name: client_name)
         end 
         return sum
     end

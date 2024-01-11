@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_28_161324) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_11_174529) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -76,6 +76,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_28_161324) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "cash_movements", force: :cascade do |t|
+    t.decimal "amount"
+    t.boolean "cash_in"
+    t.boolean "cash_out"
+    t.string "person"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "client_employees", force: :cascade do |t|
     t.bigint "employee_id", null: false
     t.bigint "client_id", null: false
@@ -126,6 +135,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_28_161324) do
     t.decimal "change"
   end
 
+  create_table "drawings", force: :cascade do |t|
+    t.bigint "drink_id", null: false
+    t.decimal "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "bottle"
+    t.index ["drink_id"], name: "index_drawings_on_drink_id"
+  end
+
   create_table "drinks", force: :cascade do |t|
     t.string "name"
     t.string "supplyer"
@@ -149,6 +167,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_28_161324) do
     t.string "surname"
     t.date "date_of_birth"
     t.decimal "salary"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "fixed_assets", force: :cascade do |t|
+    t.string "asset_name"
+    t.decimal "asset_unit_price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -228,6 +253,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_28_161324) do
   add_foreign_key "client_employees", "clients"
   add_foreign_key "client_employees", "employees"
   add_foreign_key "crates", "clients"
+  add_foreign_key "drawings", "drinks"
   add_foreign_key "goods", "drinks"
   add_foreign_key "goods", "purchases"
   add_foreign_key "items", "commands"
