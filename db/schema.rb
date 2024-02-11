@@ -14,11 +14,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_11_174529) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "accountings", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -157,8 +152,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_11_174529) do
     t.integer "number_per_package"
     t.string "container_type"
     t.string "abbreviation", default: "ITM"
-    t.decimal "buying_cost", default: "0.0"
-    t.decimal "safe_quantity", default: "0.0"
     t.decimal "government_price", default: "0.0"
   end
 
