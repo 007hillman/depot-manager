@@ -29,21 +29,22 @@
   </head>
 
   <body class=" bg-violet-100 h-screen">
-    <div class="grid grid-cols-12 w-full pr-10">
-      <div class="col-span-2 bg-gray-800">
-        <%= link_to root_path , class: "block   px-2 border bg-gray-800 text-white font-bold hover:bg-blue-800 hover:text-gray-100 px-8 py-2" do %>
-          <ion-icon name="home-outline" size="small" style="stroke-width : 16px;"></ion-icon>
-        <% end %>
-      </div >
-      <div class="flex justify-center items-center border border-gray-700 rounded-full w-10 h-10 col-start-12">
-                <ion-icon name="person-outline" size="small" style="stroke-width : 16px;"></ion-icon>
+    <div data-controller="hello">
+      <div class="grid grid-cols-12 w-full pr-10" >
+        <button class=" bg-blue-700 w-10 h-10 lg:hidden" data-action="click->hello#show_menu"> + </button>
+        <div class="flex justify-center items-center border border-gray-700 rounded-full w-10 h-10 col-start-12">
+              <ion-icon name="person-outline" size="small" style="stroke-width : 16px;"></ion-icon>
+        </div>
+      </div>
+      <div id="menu_div" class="hidden bg-gray-900">
+        <%= render partial: "/layouts/components/menu" %>
       </div>
     </div>
-    <div class="grid grid-cols-12  h-full ">
-      <section  class="col-span-2" data-controller="debts">
+    <div class="grid grid-cols-12  h-full  ">
+      <section  class="col-span-2 hidden lg:block " data-controller="debts">
         <%= render partial: "/layouts/components/leftpane" %>
       </section>
-      <main class="col-start-3 col-span-10">
+      <main class=" col-span-12 lg:col-span-10">
         <div class=" py-3 bg-white px-10">
           <%= yield %>
         </div>

@@ -2,12 +2,12 @@
   <% if notice.present? %>
     <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
   <% end %>
-  <div class="flex justify-between items-center gap-5 mb-10">
+  <div class="flex flex-col lg:flex-row justify-between items-center gap-5 mb-10">
     <h1 class="font-bold text-4xl">Commands</h1>
-    <input type="text" name="" id="search_field" data-action="keyup->command#search_client" class="inline-block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 grow" placeholder="enter a client name to view their commmands">
+
     <%= link_to 'New command', new_command_path, class: "rounded-lg py-2 px-5 bg-blue-600 text-white block font-medium" %>
   </div>
-  <section class="grid grid-cols-3 gap-5 ">
+  <section class=" hidden lg:block grid grid-cols-1 lg:grid-cols-3 gap-5 ">
     <% @result.each do |company, h| %>
       <div class="border border-blue-300 flex flex-col rounded-md p-5 max-h-40 overflow-y-auto">
         <span class="font-bold block mb-2"> <%= company %> : <span> <%= get_total(@commands, company) %> </span> </span> 
@@ -24,9 +24,9 @@
   <div class="mt-10 flex justify-between">
     <form action="/commands" method="get">
       <input type="date" name="search_date" id="search_date" value= "<%= @date%>">
-      <button type="submit" class="rounded-lg py-2 px-5 bg-red-400 text-white inline-block font-medium cursor-pointer"> show commands for this date</button>
+      <button type="submit" class="rounded-lg py-2 px-5 bg-red-400 text-white inline-block font-medium cursor-pointer"> show commands </button>
     </form>
-    <%= link_to "show all commands", commands_path(message: "all")%>
+    <%= link_to "show all commands", commands_path(message: "all") , class: "hidden lg:block"%>
   </div>
   <ul id="result"></ul>
       <div>
@@ -34,8 +34,8 @@
     <div>Total cash in hand : </div>
 
   </div>
-  <div class="grid grid-cols-4 mt-10 bg-gray-900 text-white text-xl py-3 font-bold">
-    <div class="text-center">client name</div> <div class="text-center">Command total</div> <div class="text-center">Date </div> <div class="text-center">Amount paid</div>
+  <div class="grid grid-cols-2 lg:grid-cols-4 mt-10 bg-gray-900 text-white text-sm lg:text-xl py-3 font-bold">
+    <div class="text-center">client name</div> <div class="text-center">Command total</div> <div class="text-center hidden lg:block">Date </div> <div class="text-center">Amount paid</div>
   </div>
 
   <div id="commands" class="min-w-full">
@@ -43,12 +43,12 @@
       <% @commands.each do |command| %>
       <li class="hover:text-blue-300 hover:bg-gray-900">
 
-        <%= link_to command , class: "grid grid-cols-4 py-3" do %>
+        <%= link_to command , class: "grid  grid-cols-2 lg:grid-cols-4 py-3" do %>
             <div class="text-center">
             <%= command.client_name %></div>
             <div class="text-center"><%= Command.command_total(command)%></div>
-            <div class="text-center"><%= command.created_at.strftime("%A, %d %B %Y")%></div>
-            <div class="text-center">
+            <div class="text-center hidden lg:block"><%= command.created_at.strftime("%A, %d %B %Y")%></div>
+            <div class="text-center hidden lg:block">
               <%= command.amount_paid%>
             </div>
 

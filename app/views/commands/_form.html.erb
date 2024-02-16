@@ -1,5 +1,5 @@
 <div data-controller="command">
-  <%= form_with(model: command, class: "contents") do |form| %>
+  <%= form_with(model: command, class: "contents flex flex-col") do |form| %>
     <% if command.errors.any? %>
       <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
         <h2><%= pluralize(command.errors.count, "error") %> prohibited this command from being saved:</h2>
@@ -17,7 +17,7 @@
       <%= form.text_field :client_name ,autocomplete: "off", class: "block  outline-none px-3 py-2 mt-2 w-full ,  border border-0 border-b-2 border-gray-400 bg-white rounded-md", placeholder: "client name " , data: {action: "keyup->debts#search_names"}, id: "name_field" %>
       <ul id="result"> </ul>
     </div>
-    <div class="flex gap-4 w-full mb-10 ">
+    <div class="flex flex-col lg:flex-row gap-4 w-full mb-10 ">
       <div class="w-full">
         <%= form.text_field :amount_paid, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full,  border border-0 border-b-2 border-gray-400 bg-white", placeholder: "amount paid"  %>
       </div>
