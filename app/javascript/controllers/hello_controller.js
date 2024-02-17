@@ -2,7 +2,12 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   connect() {
-    
+    document.addEventListener("keypress",(ev)=>{
+      if(ev.code == "Enter"){
+        ev.preventDefault()
+        document.querySelector("#submit").click()
+      }
+    })
   }
   show_menu(){
     var item = document.querySelector('#menu_div')
