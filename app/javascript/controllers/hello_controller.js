@@ -10,12 +10,12 @@ export default class extends Controller {
   }
   up(e){
     e.preventDefault()
-    var quantity_field = document.querySelector('#quantity')
+    var quantity_field = e.target.parentElement.parentElement.querySelector("#quantity")
     quantity_field.value = parseInt(quantity_field.value, 10) + 1
   }
   down(e){
     e.preventDefault()
-    var quantity_field = document.querySelector('#quantity')
+    var quantity_field = e.target.parentElement.parentElement.querySelector("#quantity")
     quantity_field.value = parseInt(quantity_field.value, 10) - 1
   }
 }

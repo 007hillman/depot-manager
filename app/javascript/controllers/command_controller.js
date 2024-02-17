@@ -16,6 +16,7 @@ static targets = ["itemRow", "template", "items", "query"]
     item.querySelector("input[name*='_destroy']").value = 1 
     item.style.display = 'none'
   }
+  
   addItem(event){
   	event.preventDefault()
   	var content = this.itemRowTarget.innerHTML.replace(/TEMPLATE_RECORD/g, new Date().getTime())
